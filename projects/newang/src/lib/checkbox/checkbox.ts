@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, booleanAttribute, forwardRef, input, model } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /** `<na-checkbox label="Remember me" [(checked)]="v" />` or `formControl`. */
@@ -28,7 +28,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class NaCheckbox implements ControlValueAccessor {
   readonly label = input('');
   readonly checked = model(false);
-  readonly disabled = input(false);
+  readonly disabled = input(false, { transform: booleanAttribute });
 
   private onChange: (v: boolean) => void = () => undefined;
   private onTouched: () => void = () => undefined;

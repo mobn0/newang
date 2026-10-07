@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, numberAttribute } from '@angular/core';
 
 /** `<na-heading level="1">Title</na-heading>` — size/weight/margins baked in. */
 @Component({
@@ -24,7 +24,13 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   `,
 })
 export class NaHeading {
-  readonly level = input<1 | 2 | 3 | 4>(2);
+  // Accepts `level="1"` (string) as well as `[level]="1"` — coerced to 1-4.
+  readonly level = input<1 | 2 | 3 | 4>(2, {
+    transform: (v: unknown): 1 | 2 | 3 | 4 => {
+      const n = numberAttribute(v);
+      return n === 1 || n === 3 || n === 4 ? n : 2;
+    },
+  });
 }
 
 /** `<na-text tone="muted" size="sm">…</na-text>` */

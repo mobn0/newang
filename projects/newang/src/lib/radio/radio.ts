@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, booleanAttribute, forwardRef, input, model } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
@@ -43,7 +43,7 @@ export class NaRadioGroup implements ControlValueAccessor {
   readonly label = input('');
   readonly options = input<{ value: string | number; label: string }[]>([]);
   readonly value = model<string | number | undefined>(undefined);
-  readonly disabled = input(false);
+  readonly disabled = input(false, { transform: booleanAttribute });
   readonly groupName = input(`na-radio-${Math.floor(Math.random() * 1e6)}`);
 
   private onChange: (v: unknown) => void = () => undefined;

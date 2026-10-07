@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, booleanAttribute, input, output } from '@angular/core';
 
 /**
  * Opinionated form wrapper — vertical stack + submit row baked in.
@@ -29,8 +29,8 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 })
 export class NaForm {
   readonly submitLabel = input('Submit');
-  readonly submitDisabled = input(false);
-  readonly showCancel = input(false);
+  readonly submitDisabled = input(false, { transform: booleanAttribute });
+  readonly showCancel = input(false, { transform: booleanAttribute });
   readonly submitted = output<SubmitEvent>();
   readonly cancelled = output<void>();
 

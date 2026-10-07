@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, numberAttribute } from '@angular/core';
 
 /** Root wrapper — applies bg + text color. `<na-app>…</na-app>` */
 @Component({
@@ -57,7 +57,13 @@ export class NaRow {
   template: `<div class="na-grid na-cols--{{ cols() }} na-gap--{{ gap() }}"><ng-content /></div>`,
 })
 export class NaGrid {
-  readonly cols = input<1 | 2 | 3 | 4>(2);
+  // Accepts `cols="3"` (string) as well as `[cols]="3"` — coerced to 1-4.
+  readonly cols = input<1 | 2 | 3 | 4>(2, {
+    transform: (v: unknown): 1 | 2 | 3 | 4 => {
+      const n = numberAttribute(v);
+      return n === 1 || n === 3 || n === 4 ? n : 2;
+    },
+  });
   readonly gap = input<'xs' | 'sm' | 'md' | 'lg' | 'xl'>('md');
 }
 

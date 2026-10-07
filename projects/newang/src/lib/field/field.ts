@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, booleanAttribute, input } from '@angular/core';
 
 /**
  * Opinionated field wrapper — label, hint and error spacing baked in.
@@ -29,5 +29,5 @@ export class NaField {
   readonly label = input('');
   readonly hint = input('');
   readonly error = input('');
-  readonly required = input(false);
+  readonly required = input(false, { transform: booleanAttribute });
 }

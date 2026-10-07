@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, booleanAttribute, input, output } from '@angular/core';
 
 /** Flat modal. `<na-modal title="Confirm" [open]="show" (closed)="show=false">…</na-modal>` */
 @Component({
@@ -28,6 +28,6 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 })
 export class NaModal {
   readonly title = input('Dialog');
-  readonly open = input(false);
+  readonly open = input(false, { transform: booleanAttribute });
   readonly closed = output<void>();
 }

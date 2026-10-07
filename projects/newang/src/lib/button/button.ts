@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, booleanAttribute, input, output } from '@angular/core';
 
 export type NaButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 export type NaButtonSize = 'sm' | 'md' | 'lg';
@@ -37,8 +37,8 @@ export class NaButton {
   readonly variant = input<NaButtonVariant>('primary');
   readonly size = input<NaButtonSize>('md');
   readonly type = input<'button' | 'submit' | 'reset'>('button');
-  readonly disabled = input(false);
-  readonly loading = input(false);
-  readonly fullWidth = input(false);
+  readonly disabled = input(false, { transform: booleanAttribute });
+  readonly loading = input(false, { transform: booleanAttribute });
+  readonly fullWidth = input(false, { transform: booleanAttribute });
   readonly pressed = output<MouseEvent>();
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, numberAttribute } from '@angular/core';
 
 export interface NaTableColumn {
   key: string;
@@ -115,5 +115,5 @@ export class NaSpinner {
   `,
 })
 export class NaProgress {
-  readonly value = input(0);
+  readonly value = input(0, { transform: numberAttribute });
 }
