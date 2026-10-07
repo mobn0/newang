@@ -19,7 +19,7 @@
   font-weight: 600;
   line-height: 1.4;
   padding: 10px 18px;
-  border-radius: t.$na-radius-md;
+  border-radius: var(--na-radius-md, t.$na-radius-md);
   border: 1px solid transparent;
   cursor: pointer;
   // flat: no shadows, no gradients, no glows

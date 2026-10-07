@@ -24,7 +24,7 @@
 .na-check__box {
   width: 18px;
   height: 18px;
-  border-radius: t.$na-radius-sm;
+  border-radius: var(--na-radius-sm, t.$na-radius-sm);
   border: 1px solid var(--na-border-strong, t.$na-border-strong);
   background: var(--na-surface-1, t.$na-surface-1);
   display: inline-flex;

@@ -72,7 +72,7 @@
   font-size: 13px;
   background: var(--na-surface-2, t.$na-surface-2);
   border: 1px solid var(--na-border, t.$na-border);
-  border-radius: t.$na-radius-sm;
+  border-radius: var(--na-radius-sm, t.$na-radius-sm);
   padding: 2px 7px;
   color: var(--na-accent, t.$na-accent);
 }
@@ -81,7 +81,7 @@
   text-align: center;
   padding: t.$na-space-xl t.$na-space-md;
   border: 1px dashed var(--na-border-strong, t.$na-border-strong);
-  border-radius: t.$na-radius-lg;
+  border-radius: var(--na-radius-lg, t.$na-radius-lg);
   background: var(--na-surface-1, t.$na-surface-1);
 }
 

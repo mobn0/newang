@@ -6,7 +6,7 @@
 
 .na-alert {
   border: 1px solid var(--na-border, t.$na-border);
-  border-radius: t.$na-radius-md;
+  border-radius: var(--na-radius-md, t.$na-radius-md);
   background: var(--na-surface-1, t.$na-surface-1);
   padding: t.$na-space-md;
   box-shadow: none;

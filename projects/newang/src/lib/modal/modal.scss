@@ -15,7 +15,7 @@
   width: min(560px, 100%);
   background: var(--na-surface-1, t.$na-surface-1);
   border: 1px solid var(--na-border, t.$na-border);
-  border-radius: t.$na-radius-lg;
+  border-radius: var(--na-radius-lg, t.$na-radius-lg);
   box-shadow: none;
 }
 
@@ -39,7 +39,7 @@
   border: 1px solid var(--na-border, t.$na-border);
   background: var(--na-surface-2, t.$na-surface-2);
   color: var(--na-text-muted, t.$na-text-muted);
-  border-radius: t.$na-radius-sm;
+  border-radius: var(--na-radius-sm, t.$na-radius-sm);
   width: 30px;
   height: 30px;
   cursor: pointer;

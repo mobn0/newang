@@ -7,7 +7,7 @@
 .na-card {
   background: var(--na-surface-1, t.$na-surface-1);
   border: 1px solid var(--na-border, t.$na-border);
-  border-radius: t.$na-radius-lg;
+  border-radius: var(--na-radius-lg, t.$na-radius-lg);
   // flat: no shadow
   box-shadow: none;
   overflow: hidden;

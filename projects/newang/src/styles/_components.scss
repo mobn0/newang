@@ -13,7 +13,7 @@
     color: var(--na-text, t.$na-text);
     background: var(--na-surface-1, t.$na-surface-1);
     border: 1px solid var(--na-border, t.$na-border);
-    border-radius: t.$na-radius-md;
+    border-radius: var(--na-radius-md, t.$na-radius-md);
     padding: 10px 14px;
     box-shadow: none;
   }
@@ -69,7 +69,7 @@
     color: var(--na-text, t.$na-text);
     background: var(--na-surface-2, t.$na-surface-2);
     border: 1px solid var(--na-border, t.$na-border);
-    border-radius: t.$na-radius-sm;
+    border-radius: var(--na-radius-sm, t.$na-radius-sm);
     padding: 6px 10px;
     z-index: 50;
     pointer-events: none;

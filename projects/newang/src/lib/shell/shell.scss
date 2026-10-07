@@ -10,9 +10,37 @@
   justify-content: space-between;
   gap: t.$na-space-md;
   flex-wrap: wrap;
+  box-sizing: border-box;
+  padding-inline: t.$na-space-md;
   padding-bottom: t.$na-space-md;
   border-bottom: 1px solid var(--na-border, t.$na-border);
   margin-bottom: t.$na-space-md;
+}
+
+// Optional content caps matching na-page widths — shell aligns with page.
+.na-header--sm,
+.na-footer--sm {
+  max-width: 560px;
+}
+
+.na-header--md,
+.na-footer--md {
+  max-width: 860px;
+}
+
+.na-header--lg,
+.na-footer--lg {
+  max-width: 1180px;
+}
+
+.na-header--sm,
+.na-header--md,
+.na-header--lg,
+.na-footer--sm,
+.na-footer--md,
+.na-footer--lg {
+  width: 100%;
+  margin-inline: auto;
 }
 
 .na-header__title {
@@ -41,6 +69,8 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  box-sizing: border-box;
+  padding-inline: t.$na-space-md;
   padding-top: t.$na-space-md;
   border-top: 1px solid var(--na-border, t.$na-border);
   margin-top: t.$na-space-md;

@@ -10,7 +10,7 @@
   gap: t.$na-space-md;
   background: var(--na-surface-1, t.$na-surface-1);
   border: 1px solid var(--na-border, t.$na-border);
-  border-radius: t.$na-radius-lg;
+  border-radius: var(--na-radius-lg, t.$na-radius-lg);
   padding: t.$na-space-lg;
   box-shadow: none;
 }
@@ -35,7 +35,7 @@
   font-size: 14px;
   font-weight: 600;
   padding: 10px 22px;
-  border-radius: t.$na-radius-md;
+  border-radius: var(--na-radius-md, t.$na-radius-md);
   border: 1px solid var(--na-accent, t.$na-accent);
   background: var(--na-accent, t.$na-accent);
   color: var(--na-accent-ink, t.$na-accent-ink);
@@ -59,7 +59,7 @@
   font-size: 14px;
   font-weight: 600;
   padding: 10px 18px;
-  border-radius: t.$na-radius-md;
+  border-radius: var(--na-radius-md, t.$na-radius-md);
   border: 1px solid var(--na-border, t.$na-border);
   background: transparent;
   color: var(--na-text-muted, t.$na-text-muted);

@@ -53,6 +53,7 @@ No `class=`, no `style=`, no stylesheets. Control everything with inputs: `gap`,
 - `na-field`'s `error` only renders the message. Add `[invalid]="true"` (or `aria-invalid="true"`) to the projected `input naInput` to paint the danger border.
 - `na-button` defaults to `variant="primary"`, `size="md"`, `type="button"`; pass `fullWidth` for a block-level button.
 - `na-page` defaults to `maxWidth="md"`.
+- `na-header`/`na-footer` ship with 16px side gutters and default to `maxWidth="full"`; pass `sm`/`md`/`lg` to cap content to the `na-page` widths so shell aligns with page.
 - `na-breadcrumbs` accepts plain strings or `{ label, href }` items — items with `href` render as links.
 - `na-modal` closes on backdrop click, ✕, or `Escape` (handle `(closed)`).
 - `na-progress` clamps `value` to 0–100.
@@ -71,7 +72,9 @@ No `class=`, no `style=`, no stylesheets. Control everything with inputs: `gap`,
 
 ## Theme
 
-Dark-only for v1. Tokens live in `newang/styles` (`$na-bg`, `$na-accent`, …) as `!default` SCSS variables mirrored to `--na-*` CSS custom properties. Flat elevation via 1px borders; focus is a 2px lime `outline`. Stylelint bans `linear-gradient`, `box-shadow` (except `none`), `text-shadow` and `drop-shadow`.
+Dark-only for v1. Tokens live in `newang/styles` (`$na-bg`, `$na-accent`, …) as `!default` SCSS variables mirrored to `--na-*` CSS custom properties — colors, radii (`--na-radius-sm/md/lg`), spacing (`--na-space-xs`…`--na-space-xl`) and fonts (`--na-font`, `--na-mono`). Components read them via `var(--na-*, <fallback>)`, so consumers can re-skin at runtime with plain CSS, no SCSS rebuild needed. Flat elevation via 1px borders; focus is a 2px lime `outline`. Stylelint bans `linear-gradient`, `box-shadow` (except `none`), `text-shadow` and `drop-shadow`.
+
+Square by default, round on purpose: all corner radii ship as `0`. The only round elements are radio dots (a round radio is what distinguishes it from a checkbox), the switch track/thumb (toggle affordance) and spinner rings including the button loading spinner (rotation needs a circle). Everything else — cards, alerts, badges, avatars, progress, inputs, buttons, modals, tooltips — is square. Set `--na-radius-sm/md/lg` to bring roundness back globally.
 
 ## Releases
 
