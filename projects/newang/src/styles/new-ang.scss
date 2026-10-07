@@ -1,0 +1,17 @@
+// Public SCSS entry for consumers:
+//
+//   @use 'newang/styles' as na;
+//   @include na.base();
+//
+// Stylelint: gradients, glows and shadows are banned in this library.
+
+@forward './tokens';
+@forward './mixins';
+@forward './base';
+@forward './components';
+@use './base' as b;
+@use './tokens' as t;
+
+@mixin base {
+  @include b.base;
+}

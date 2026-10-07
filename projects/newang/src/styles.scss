@@ -1,0 +1,7 @@
+// Root SCSS entry shipped as `newang/styles` in dist.
+@forward './styles/new-ang';
+@use './styles/base' as b;
+
+@mixin base {
+  @include b.base;
+}

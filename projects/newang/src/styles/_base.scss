@@ -1,0 +1,48 @@
+@use './tokens' as t;
+@use './mixins' as m;
+@use './components' as c;
+
+// Opinionated base: one `@include na.base()` and raw HTML already
+// looks right. No gradients, no shadows, flat borders everywhere.
+@mixin base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    background: var(--na-bg, t.$na-bg);
+    color: var(--na-text, t.$na-text);
+    font-family: t.$na-font;
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--na-accent, t.$na-accent);
+    color: var(--na-accent-ink, t.$na-accent-ink);
+  }
+
+  a {
+    color: var(--na-accent, t.$na-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  ::placeholder {
+    color: var(--na-text-faint, t.$na-text-faint);
+    opacity: 1;
+  }
+
+  :focus-visible {
+    @include m.focus-ring;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--na-border-strong, t.$na-border-strong) transparent;
+  }
+
+  @include c.components;
+}

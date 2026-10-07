@@ -1,0 +1,76 @@
+@use './tokens' as t;
+
+// Global (unencapsulated) styles for attribute directives.
+// Included automatically by `@include na.base()` so `naInput`
+// and `naTooltip` work with zero consumer CSS.
+@mixin components {
+  .na-input {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: t.$na-font;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--na-text, t.$na-text);
+    background: var(--na-surface-1, t.$na-surface-1);
+    border: 1px solid var(--na-border, t.$na-border);
+    border-radius: t.$na-radius-md;
+    padding: 10px 14px;
+    box-shadow: none;
+  }
+
+  textarea.na-input {
+    min-height: 96px;
+    resize: vertical;
+  }
+
+  select.na-input {
+    appearance: none;
+    padding-right: 36px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a6afa1' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+  }
+
+  .na-input:hover:not(:disabled) {
+    border-color: var(--na-border-strong, t.$na-border-strong);
+  }
+
+  .na-input:focus {
+    outline: t.$na-focus-ring;
+    outline-offset: 1px;
+    border-color: var(--na-accent, t.$na-accent);
+  }
+
+  .na-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .na-input[aria-invalid='true'] {
+    border-color: var(--na-danger, t.$na-danger);
+  }
+
+  // Tooltip directive: flat dark bubble, 1px border, no glow.
+  [naTooltip] {
+    position: relative;
+  }
+
+  [naTooltip]:hover::after,
+  [naTooltip]:focus-visible::after {
+    content: attr(data-na-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-family: t.$na-font;
+    font-size: 12px;
+    color: var(--na-text, t.$na-text);
+    background: var(--na-surface-2, t.$na-surface-2);
+    border: 1px solid var(--na-border, t.$na-border);
+    border-radius: t.$na-radius-sm;
+    padding: 6px 10px;
+    z-index: 50;
+    pointer-events: none;
+  }
+}

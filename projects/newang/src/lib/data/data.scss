@@ -1,0 +1,104 @@
+@use '../../styles/tokens' as t;
+
+:host {
+  display: block;
+}
+
+.na-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--na-border, t.$na-border);
+  border-radius: t.$na-radius-lg;
+  background: var(--na-surface-1, t.$na-surface-1);
+}
+
+.na-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: t.$na-font;
+  font-size: 14px;
+}
+
+.na-table th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--na-text-muted, t.$na-text-muted);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--na-border, t.$na-border);
+  background: var(--na-surface-2, t.$na-surface-2);
+}
+
+.na-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--na-border, t.$na-border);
+  color: var(--na-text, t.$na-text);
+}
+
+.na-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.na-table__empty {
+  text-align: center;
+  color: var(--na-text-faint, t.$na-text-faint);
+}
+
+.na-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--na-surface-1, t.$na-surface-1);
+  border: 1px solid var(--na-border, t.$na-border);
+  border-radius: t.$na-radius-lg;
+}
+
+.na-crumbs {
+  display: flex;
+  align-items: center;
+  gap: t.$na-space-sm;
+  font-size: 13px;
+}
+
+.na-crumbs__item {
+  color: var(--na-text-muted, t.$na-text-muted);
+}
+
+.na-crumbs__sep {
+  color: var(--na-text-faint, t.$na-text-faint);
+}
+
+.na-crumbs__current {
+  color: var(--na-accent, t.$na-accent);
+  font-weight: 600;
+}
+
+.na-spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--na-border-strong, t.$na-border-strong);
+  border-top-color: var(--na-accent, t.$na-accent);
+  animation: na-spin 0.7s linear infinite;
+}
+
+.na-progress {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--na-surface-3, t.$na-surface-3);
+  border: 1px solid var(--na-border, t.$na-border);
+  overflow: hidden;
+}
+
+.na-progress__fill {
+  height: 100%;
+  background: var(--na-accent, t.$na-accent);
+}
+
+@keyframes na-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

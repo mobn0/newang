@@ -1,0 +1,104 @@
+@use '../../styles/tokens' as t;
+
+:host {
+  display: block;
+}
+
+.na-h {
+  margin: 0;
+  font-family: t.$na-font;
+  color: var(--na-text, t.$na-text);
+  line-height: 1.25;
+}
+
+.na-h1 {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.na-h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.na-h3 {
+  font-size: 18px;
+  font-weight: 650;
+}
+
+.na-h4 {
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.na-text {
+  margin: 0;
+  font-family: t.$na-font;
+  line-height: 1.55;
+  color: var(--na-text, t.$na-text);
+}
+
+.na-text--sm {
+  font-size: 13px;
+}
+
+.na-text--md {
+  font-size: 14px;
+}
+
+.na-text--lg {
+  font-size: 16px;
+}
+
+.na-text--muted {
+  color: var(--na-text-muted, t.$na-text-muted);
+}
+
+.na-text--faint {
+  color: var(--na-text-faint, t.$na-text-faint);
+}
+
+.na-text--accent {
+  color: var(--na-accent, t.$na-accent);
+}
+
+.na-link {
+  color: var(--na-accent, t.$na-accent);
+  text-underline-offset: 3px;
+}
+
+.na-code {
+  font-family: t.$na-mono;
+  font-size: 13px;
+  background: var(--na-surface-2, t.$na-surface-2);
+  border: 1px solid var(--na-border, t.$na-border);
+  border-radius: t.$na-radius-sm;
+  padding: 2px 7px;
+  color: var(--na-accent, t.$na-accent);
+}
+
+.na-empty {
+  text-align: center;
+  padding: t.$na-space-xl t.$na-space-md;
+  border: 1px dashed var(--na-border-strong, t.$na-border-strong);
+  border-radius: t.$na-radius-lg;
+  background: var(--na-surface-1, t.$na-surface-1);
+}
+
+.na-empty__title {
+  margin: 0;
+  font-weight: 650;
+  color: var(--na-text, t.$na-text);
+}
+
+.na-empty__desc {
+  margin: t.$na-space-xs 0 0;
+  font-size: 13px;
+  color: var(--na-text-muted, t.$na-text-muted);
+}
+
+.na-empty__action {
+  margin-top: t.$na-space-md;
+  display: flex;
+  justify-content: center;
+}

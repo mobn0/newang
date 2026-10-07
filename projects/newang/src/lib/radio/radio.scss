@@ -1,0 +1,64 @@
+@use '../../styles/tokens' as t;
+
+:host {
+  display: block;
+}
+
+.na-radio-group__label {
+  margin: 0 0 t.$na-space-sm;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--na-text, t.$na-text);
+}
+
+.na-radio-group__options {
+  display: flex;
+  flex-direction: column;
+  gap: t.$na-space-sm;
+}
+
+.na-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: t.$na-space-sm;
+  cursor: pointer;
+  font-family: t.$na-font;
+  font-size: 14px;
+  color: var(--na-text, t.$na-text);
+}
+
+.na-radio__input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.na-radio__dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--na-border-strong, t.$na-border-strong);
+  background: var(--na-surface-1, t.$na-surface-1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.na-radio__input:checked + .na-radio__dot {
+  border-color: var(--na-accent, t.$na-accent);
+}
+
+.na-radio__input:checked + .na-radio__dot::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--na-accent, t.$na-accent);
+}
+
+.na-radio__input:focus-visible + .na-radio__dot {
+  outline: t.$na-focus-ring;
+  outline-offset: 2px;
+}

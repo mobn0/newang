@@ -1,0 +1,14 @@
+@use './tokens' as t;
+
+// Focus ring: flat outline only — never box-shadow glow.
+@mixin focus-ring {
+  outline: t.$na-focus-ring;
+  outline-offset: 2px;
+}
+
+// Single-line truncate.
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

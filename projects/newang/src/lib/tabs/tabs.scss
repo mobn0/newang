@@ -1,0 +1,38 @@
+@use '../../styles/tokens' as t;
+
+:host {
+  display: block;
+}
+
+.na-tabs {
+  display: flex;
+  gap: t.$na-space-xs;
+  border-bottom: 1px solid var(--na-border, t.$na-border);
+}
+
+.na-tabs__tab {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 10px 14px;
+  font-family: t.$na-font;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--na-text-muted, t.$na-text-muted);
+  cursor: pointer;
+}
+
+.na-tabs__tab:hover {
+  color: var(--na-text, t.$na-text);
+}
+
+.na-tabs__tab--active {
+  color: var(--na-accent, t.$na-accent);
+  border-bottom-color: var(--na-accent, t.$na-accent);
+}
+
+.na-tabs__panel {
+  padding-top: t.$na-space-md;
+}

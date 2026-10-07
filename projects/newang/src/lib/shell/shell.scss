@@ -1,0 +1,56 @@
+@use '../../styles/tokens' as t;
+
+:host {
+  display: block;
+}
+
+.na-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: t.$na-space-md;
+  flex-wrap: wrap;
+  padding-bottom: t.$na-space-md;
+  border-bottom: 1px solid var(--na-border, t.$na-border);
+  margin-bottom: t.$na-space-md;
+}
+
+.na-header__title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--na-text, t.$na-text);
+}
+
+.na-header__subtitle {
+  margin: t.$na-space-xs 0 0;
+  font-size: 13px;
+  color: var(--na-text-muted, t.$na-text-muted);
+}
+
+.na-header__actions {
+  display: flex;
+  gap: t.$na-space-sm;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.na-footer {
+  display: flex;
+  gap: t.$na-space-sm;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: t.$na-space-md;
+  border-top: 1px solid var(--na-border, t.$na-border);
+  margin-top: t.$na-space-md;
+  font-size: 13px;
+  color: var(--na-text-muted, t.$na-text-muted);
+}
+
+.na-toolbar {
+  display: flex;
+  gap: t.$na-space-sm;
+  align-items: center;
+  flex-wrap: wrap;
+}

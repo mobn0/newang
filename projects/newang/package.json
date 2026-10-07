@@ -1,0 +1,36 @@
+{
+  "name": "newang",
+  "version": "0.0.1",
+  "description": "Opinionated dark Angular component library with a pastel lime accent. Flat static colors, zero consumer CSS required.",
+  "keywords": ["angular", "components", "dark-theme", "design-system", "newang"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/newang/newang.git"
+  },
+  "homepage": "https://github.com/newang/newang#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "schematics": "./schematics/collection.json",
+  "ng-add": {
+    "save": true
+  },
+  "exports": {
+    ".": {
+      "sass": "./styles/new-ang.scss",
+      "default": "./index.mjs"
+    },
+    "./styles": "./styles.scss",
+    "./styles/*": "./styles/*"
+  },
+  "peerDependencies": {
+    "@angular/common": ">=19.0.0",
+    "@angular/core": ">=19.0.0",
+    "@angular/forms": ">=19.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

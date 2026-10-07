@@ -1,0 +1,111 @@
+@use '../../styles/tokens' as t;
+
+:host {
+  display: inline-block;
+}
+
+:host:has(.na-btn--block) {
+  display: block;
+}
+
+.na-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: t.$na-space-sm;
+  width: 100%;
+  font-family: t.$na-font;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  padding: 10px 18px;
+  border-radius: t.$na-radius-md;
+  border: 1px solid transparent;
+  cursor: pointer;
+  // flat: no shadows, no gradients, no glows
+  box-shadow: none;
+  background: none;
+  transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.na-btn--sm {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.na-btn--lg {
+  padding: 13px 24px;
+  font-size: 15px;
+}
+
+.na-btn--block {
+  width: 100%;
+}
+
+.na-btn--primary {
+  background: var(--na-accent, t.$na-accent);
+  border-color: var(--na-accent, t.$na-accent);
+  color: var(--na-accent-ink, t.$na-accent-ink);
+}
+
+.na-btn--primary:hover:not(:disabled) {
+  background: var(--na-accent-hover, t.$na-accent-hover);
+  border-color: var(--na-accent-hover, t.$na-accent-hover);
+}
+
+.na-btn--primary:active:not(:disabled) {
+  background: var(--na-accent-active, t.$na-accent-active);
+  border-color: var(--na-accent-active, t.$na-accent-active);
+}
+
+.na-btn--secondary {
+  background: var(--na-surface-1, t.$na-surface-1);
+  border-color: var(--na-border, t.$na-border);
+  color: var(--na-text, t.$na-text);
+}
+
+.na-btn--secondary:hover:not(:disabled) {
+  background: var(--na-surface-2, t.$na-surface-2);
+  border-color: var(--na-border-strong, t.$na-border-strong);
+}
+
+.na-btn--ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--na-accent, t.$na-accent);
+}
+
+.na-btn--ghost:hover:not(:disabled) {
+  background: var(--na-surface-1, t.$na-surface-1);
+}
+
+.na-btn--danger {
+  background: var(--na-surface-1, t.$na-surface-1);
+  border-color: var(--na-danger, t.$na-danger);
+  color: var(--na-danger, t.$na-danger);
+}
+
+.na-btn--danger:hover:not(:disabled) {
+  background: var(--na-surface-2, t.$na-surface-2);
+}
+
+.na-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.na-btn__spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid currentcolor;
+  border-top-color: transparent;
+  animation: na-spin 0.7s linear infinite;
+}
+
+@keyframes na-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

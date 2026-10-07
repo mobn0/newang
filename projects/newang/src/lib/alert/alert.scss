@@ -1,0 +1,42 @@
+@use '../../styles/tokens' as t;
+
+:host {
+  display: block;
+}
+
+.na-alert {
+  border: 1px solid var(--na-border, t.$na-border);
+  border-left-width: 3px;
+  border-radius: t.$na-radius-md;
+  background: var(--na-surface-1, t.$na-surface-1);
+  padding: t.$na-space-md;
+  box-shadow: none;
+}
+
+.na-alert__title {
+  margin: 0 0 t.$na-space-xs;
+  font-size: 14px;
+  font-weight: 650;
+  color: var(--na-text, t.$na-text);
+}
+
+.na-alert__body {
+  font-size: 13px;
+  color: var(--na-text-muted, t.$na-text-muted);
+}
+
+.na-alert--info {
+  border-left-color: var(--na-info, t.$na-info);
+}
+
+.na-alert--success {
+  border-left-color: var(--na-success, t.$na-success);
+}
+
+.na-alert--warning {
+  border-left-color: var(--na-warning, t.$na-warning);
+}
+
+.na-alert--danger {
+  border-left-color: var(--na-danger, t.$na-danger);
+}

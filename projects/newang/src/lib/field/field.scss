@@ -1,0 +1,36 @@
+@use '../../styles/tokens' as t;
+
+:host {
+  display: block;
+}
+
+.na-field {
+  display: flex;
+  flex-direction: column;
+  gap: t.$na-space-xs;
+}
+
+.na-field__label {
+  font-family: t.$na-font;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--na-text, t.$na-text);
+}
+
+.na-field__asterisk {
+  color: var(--na-accent, t.$na-accent);
+}
+
+.na-field__control {
+  display: block;
+}
+
+.na-field__hint {
+  font-size: 12px;
+  color: var(--na-text-muted, t.$na-text-muted);
+}
+
+.na-field__error {
+  font-size: 12px;
+  color: var(--na-danger, t.$na-danger);
+}

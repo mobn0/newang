@@ -1,0 +1,53 @@
+@use '../../styles/tokens' as t;
+
+.na-modal__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: t.$na-space-lg;
+  z-index: 100;
+}
+
+.na-modal__dialog {
+  width: min(560px, 100%);
+  background: var(--na-surface-1, t.$na-surface-1);
+  border: 1px solid var(--na-border, t.$na-border);
+  border-radius: t.$na-radius-lg;
+  box-shadow: none;
+}
+
+.na-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: t.$na-space-md;
+  padding: t.$na-space-md t.$na-space-md 0;
+}
+
+.na-modal__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 650;
+  color: var(--na-text, t.$na-text);
+}
+
+.na-modal__close {
+  appearance: none;
+  border: 1px solid var(--na-border, t.$na-border);
+  background: var(--na-surface-2, t.$na-surface-2);
+  color: var(--na-text-muted, t.$na-text-muted);
+  border-radius: t.$na-radius-sm;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.na-modal__body {
+  padding: t.$na-space-md;
+  color: var(--na-text-muted, t.$na-text-muted);
+  font-size: 14px;
+}

@@ -1,0 +1,52 @@
+@use '../../styles/tokens' as t;
+
+:host {
+  display: inline-block;
+}
+
+.na-check {
+  display: inline-flex;
+  align-items: center;
+  gap: t.$na-space-sm;
+  cursor: pointer;
+  font-family: t.$na-font;
+  font-size: 14px;
+  color: var(--na-text, t.$na-text);
+}
+
+.na-check__input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.na-check__box {
+  width: 18px;
+  height: 18px;
+  border-radius: t.$na-radius-sm;
+  border: 1px solid var(--na-border-strong, t.$na-border-strong);
+  background: var(--na-surface-1, t.$na-surface-1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.na-check__input:checked + .na-check__box {
+  background: var(--na-accent, t.$na-accent);
+  border-color: var(--na-accent, t.$na-accent);
+}
+
+.na-check__input:checked + .na-check__box::after {
+  content: '✓';
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--na-accent-ink, t.$na-accent-ink);
+  line-height: 1;
+}
+
+.na-check__input:focus-visible + .na-check__box {
+  outline: t.$na-focus-ring;
+  outline-offset: 2px;
+}

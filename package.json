@@ -1,0 +1,50 @@
+{
+  "name": "newang-workspace",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build newang",
+    "build:lib": "ng build newang",
+    "watch": "ng build newang --watch --configuration development",
+    "test": "ng test newang --watch=false",
+    "test:lib": "ng test newang --watch=false",
+    "lint:style": "stylelint \"projects/newang/src/**/*.scss\"",
+    "commitlint": "commitlint --last --verbose",
+    "release": "semantic-release"
+  },
+  "private": true,
+  "packageManager": "npm@12.1.0",
+  "dependencies": {
+    "@angular/common": "^22.1.0",
+    "@angular/compiler": "^22.1.0",
+    "@angular/core": "^22.1.0",
+    "@angular/forms": "^22.1.0",
+    "@angular/platform-browser": "^22.1.0",
+    "@angular/router": "^22.1.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/schematics": "^22.1.7",
+    "@angular/build": "^22.2.2",
+    "@angular/cli": "^22.1.7",
+    "@angular/compiler-cli": "^22.1.0",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.0",
+    "@semantic-release/npm": "^12.0.1",
+    "conventional-changelog-conventionalcommits": "^8.0.0",
+    "jsdom": "^30.0.0",
+    "ng-packagr": "^22.2.0",
+    "postcss-scss": "^4.0.9",
+    "prettier": "^3.8.1",
+    "semantic-release": "^24.0.0",
+    "stylelint": "^16.0.0",
+    "typescript": "~6.0.2",
+    "vitest": "^5.0.0"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/newang",
+  "lib": {
+    "entryFile": "src/public-api.ts"
+  },
+  "assets": [
+    {
+      "input": "src/styles",
+      "glob": "**/*.scss",
+      "output": "styles"
+    },
+    {
+      "input": "src",
+      "glob": "styles.scss",
+      "output": "."
+    },
+    {
+      "input": "schematics",
+      "glob": "**/*",
+      "output": "schematics"
+    }
+  ]
+}

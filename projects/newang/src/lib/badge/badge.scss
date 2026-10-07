@@ -1,0 +1,46 @@
+@use '../../styles/tokens' as t;
+
+:host {
+  display: inline-block;
+}
+
+.na-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: t.$na-font;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--na-border, t.$na-border);
+  background: var(--na-surface-2, t.$na-surface-2);
+  color: var(--na-text, t.$na-text);
+}
+
+.na-badge--lime {
+  background: var(--na-accent, t.$na-accent);
+  border-color: var(--na-accent, t.$na-accent);
+  color: var(--na-accent-ink, t.$na-accent-ink);
+}
+
+.na-badge--success {
+  border-color: var(--na-success, t.$na-success);
+  color: var(--na-success, t.$na-success);
+}
+
+.na-badge--warning {
+  border-color: var(--na-warning, t.$na-warning);
+  color: var(--na-warning, t.$na-warning);
+}
+
+.na-badge--danger {
+  border-color: var(--na-danger, t.$na-danger);
+  color: var(--na-danger, t.$na-danger);
+}
+
+.na-badge--info {
+  border-color: var(--na-info, t.$na-info);
+  color: var(--na-info, t.$na-info);
+}

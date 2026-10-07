@@ -1,0 +1,39 @@
+@use '../../styles/tokens' as t;
+
+:host {
+  display: block;
+}
+
+.na-card {
+  background: var(--na-surface-1, t.$na-surface-1);
+  border: 1px solid var(--na-border, t.$na-border);
+  border-radius: t.$na-radius-lg;
+  // flat: no shadow
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.na-card__header {
+  padding: t.$na-space-md t.$na-space-md 0;
+}
+
+.na-card__title {
+  margin: 0;
+  font-family: t.$na-font;
+  font-size: 16px;
+  font-weight: 650;
+  color: var(--na-text, t.$na-text);
+}
+
+.na-card__subtitle {
+  margin: t.$na-space-xs 0 0;
+  font-size: 13px;
+  color: var(--na-text-muted, t.$na-text-muted);
+}
+
+.na-card__body {
+  padding: t.$na-space-md;
+  display: flex;
+  flex-direction: column;
+  gap: t.$na-space-md;
+}

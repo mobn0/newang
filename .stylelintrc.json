@@ -1,0 +1,27 @@
+{
+  "customSyntax": "postcss-scss",
+  "rules": {
+    "function-disallowed-list": [
+      [
+        "linear-gradient",
+        "repeating-linear-gradient",
+        "radial-gradient",
+        "repeating-radial-gradient",
+        "conic-gradient"
+      ],
+      {
+        "message": "newang: gradients are banned — use flat static colors."
+      }
+    ],
+    "declaration-property-value-disallowed-list": [
+      {
+        "box-shadow": ["/^(?!none$).+/"],
+        "text-shadow": ["/^(?!none$).+/"],
+        "filter": ["/drop-shadow/"]
+      },
+      {
+        "message": "newang: glows and shadows are banned — use 1px borders and outline focus rings."
+      }
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+@use '../../styles/tokens' as t;
+
+:host {
+  display: inline-block;
+}
+
+.na-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: t.$na-space-sm;
+  cursor: pointer;
+  font-family: t.$na-font;
+  font-size: 14px;
+  color: var(--na-text, t.$na-text);
+}
+
+.na-switch__input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.na-switch__track {
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--na-surface-3, t.$na-surface-3);
+  border: 1px solid var(--na-border, t.$na-border);
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.na-switch__thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--na-text-muted, t.$na-text-muted);
+}
+
+.na-switch__input:checked + .na-switch__track {
+  background: var(--na-accent, t.$na-accent);
+  border-color: var(--na-accent, t.$na-accent);
+}
+
+.na-switch__input:checked + .na-switch__track .na-switch__thumb {
+  background: var(--na-accent-ink, t.$na-accent-ink);
+  margin-left: auto;
+}
+
+.na-switch__input:focus-visible + .na-switch__track {
+  outline: t.$na-focus-ring;
+  outline-offset: 2px;
+}
+
+.na-switch__input:disabled ~ .na-switch__label,
+.na-switch__input:disabled + .na-switch__track {
+  opacity: 0.5;
+}
