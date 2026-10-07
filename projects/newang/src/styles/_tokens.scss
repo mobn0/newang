@@ -2,31 +2,31 @@
 // No gradients, no glows, no shadows with blur. Borders only for elevation.
 // All values are `!default` so consumers can override before `@include na.base()`.
 
-$na-bg: #1b1e1a !default; // app background — soft green-charcoal, not pure black
-$na-surface-1: #232723 !default; // card / input
-$na-surface-2: #2c312b !default; // raised / hover
-$na-surface-3: #343a33 !default; // active / selected
+$na-bg: #1a1a1a !default; // app background — neutral charcoal, not pure black
+$na-surface-1: #232323 !default; // card / input
+$na-surface-2: #2b2b2b !default; // raised / hover
+$na-surface-3: #333333 !default; // active / selected
 
-$na-border: #3a4139 !default;
-$na-border-strong: #4e564d !default;
+$na-border: #3a3a3a !default;
+$na-border-strong: #525252 !default;
 
-$na-text: #e7eae1 !default; // warm off-white, never #fff (less glare)
-$na-text-muted: #a6afa1 !default;
-$na-text-faint: #7e887a !default;
+$na-text: #e8e8e8 !default; // soft off-white, never #fff (less glare)
+$na-text-muted: #a8a8a8 !default;
+$na-text-faint: #808080 !default;
 
 $na-accent: #cdea7f !default; // pastel lime — actions only
 $na-accent-hover: #bddb6f !default; // static step darker (no glow)
 $na-accent-active: #adcb62 !default;
-$na-accent-ink: #1c1f1a !default; // text on top of accent
+$na-accent-ink: #1a1a1a !default; // text on top of accent
 
 $na-danger: #e2a3a3 !default; // desaturated matte status colors
 $na-success: #a9d1a4 !default;
 $na-warning: #e3c88d !default;
 $na-info: #a9c6d4 !default;
 
-$na-radius-sm: 6px !default;
-$na-radius-md: 10px !default;
-$na-radius-lg: 14px !default;
+$na-radius-sm: 0 !default;
+$na-radius-md: 0 !default;
+$na-radius-lg: 0 !default;
 
 $na-space-xs: 4px !default;
 $na-space-sm: 8px !default;

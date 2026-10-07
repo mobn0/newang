@@ -97,7 +97,7 @@
 
 .na-progress {
   height: 8px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--na-surface-3, t.$na-surface-3);
   border: 1px solid var(--na-border, t.$na-border);
   overflow: hidden;

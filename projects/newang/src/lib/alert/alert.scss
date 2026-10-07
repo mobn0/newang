@@ -6,7 +6,6 @@
 
 .na-alert {
   border: 1px solid var(--na-border, t.$na-border);
-  border-left-width: 3px;
   border-radius: t.$na-radius-md;
   background: var(--na-surface-1, t.$na-surface-1);
   padding: t.$na-space-md;
@@ -25,18 +24,18 @@
   color: var(--na-text-muted, t.$na-text-muted);
 }
 
-.na-alert--info {
-  border-left-color: var(--na-info, t.$na-info);
+.na-alert--info .na-alert__title {
+  color: var(--na-info, t.$na-info);
 }
 
-.na-alert--success {
-  border-left-color: var(--na-success, t.$na-success);
+.na-alert--success .na-alert__title {
+  color: var(--na-success, t.$na-success);
 }
 
-.na-alert--warning {
-  border-left-color: var(--na-warning, t.$na-warning);
+.na-alert--warning .na-alert__title {
+  color: var(--na-warning, t.$na-warning);
 }
 
-.na-alert--danger {
-  border-left-color: var(--na-danger, t.$na-danger);
+.na-alert--danger .na-alert__title {
+  color: var(--na-danger, t.$na-danger);
 }
