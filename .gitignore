@@ -6,6 +6,9 @@
 /out-tsc
 /bazel-out
 
+# Generated copy of root LICENSE for the published package
+/projects/newang/LICENSE
+
 # Node
 /node_modules
 npm-debug.log
