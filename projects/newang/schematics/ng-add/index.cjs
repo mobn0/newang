@@ -1,7 +1,8 @@
 /**
  * ng-add schematic for newang.
  * Adds the dark theme import to the app styles and prints usage hints.
- * Plain JS (CommonJS) so ng-packagr ships it as-is via assets.
+ * Plain JS with a `.cjs` extension so Node always parses it as
+ * CommonJS, even when the published package sets `"type": "module"`.
  */
 const { chain } = require('@angular-devkit/schematics');
 
@@ -69,7 +70,7 @@ function sayHello() {
     context.logger.info('');
     context.logger.info('newang installed — dark theme, pastel lime accent, zero CSS needed.');
     context.logger.info('Example: <na-app><na-page><na-button>Save</na-button></na-page></na-app>');
-    context.logger.info('Docs: https://github.com/newang/newang#readme');
+    context.logger.info('Docs: https://github.com/mobn0/newang#readme');
     return _tree;
   };
 }

@@ -46,16 +46,16 @@ export class NaText {
   readonly size = input<'sm' | 'md' | 'lg'>('md');
 }
 
-/** `<na-link href="…">Docs</na-link>` */
+/** `<na-link href="…">Docs</na-link>` — no `href` renders a placeholder link with no jump. */
 @Component({
   selector: 'na-link',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './typography.scss',
-  template: `<a class="na-link" [href]="href()"><ng-content /></a>`,
+  template: `<a class="na-link" [attr.href]="href() || null"><ng-content /></a>`,
 })
 export class NaLink {
-  readonly href = input('#');
+  readonly href = input('');
 }
 
 /** `<na-code>npm i</na-code>` */

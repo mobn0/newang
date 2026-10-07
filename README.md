@@ -39,6 +39,24 @@ npm i newang
 
 No `class=`, no `style=`, no stylesheets. Control everything with inputs: `gap`, `size`, `tone`, `variant`, `maxWidth`, `cols`.
 
+## API notes
+
+- `na-radio-group` is driven by an `options` input — there is no `na-radio` element:
+  ```html
+  <na-radio-group label="Plan" [options]="[{ value: 'free', label: 'Free' }, { value: 'pro', label: 'Pro' }]" />
+  ```
+  Binds via `[(value)]` or `formControl`. `disabled` works both as an input and via `formControl.disable()`.
+- `na-split` takes `columns`, a space-separated CSS value (default `"280px 1fr"`):
+  ```html
+  <na-split columns="280px 1fr"><div>Side</div><div>Main</div></na-split>
+  ```
+- `na-field`'s `error` only renders the message. Add `[invalid]="true"` (or `aria-invalid="true"`) to the projected `input naInput` to paint the danger border.
+- `na-button` defaults to `variant="primary"`, `size="md"`, `type="button"`; pass `fullWidth` for a block-level button.
+- `na-page` defaults to `maxWidth="md"`.
+- `na-breadcrumbs` accepts plain strings or `{ label, href }` items — items with `href` render as links.
+- `na-modal` closes on backdrop click, ✕, or `Escape` (handle `(closed)`).
+- `na-progress` clamps `value` to 0–100.
+
 ## Components
 
 | Area | Components |

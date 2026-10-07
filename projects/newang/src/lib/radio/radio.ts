@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, booleanAttribute, forwardRef, input, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, booleanAttribute, forwardRef, input, model, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+let nextRadioGroupId = 0;
+
 /**
- * `<na-radio-group label="Plan"><na-radio value="free" /><na-radio value="pro" /></na-radio-group>`
- * Binds as a group via `[(value)]` or `formControl`.
+ * Radio group driven by an `options` input. Binds via `[(value)]` or `formControl`:
+ * `<na-radio-group label="Plan" [options]="[{value:'free',label:'Free'},{value:'pro',label:'Pro'}]" />`
  */
 @Component({
   selector: 'na-radio-group',
@@ -27,7 +29,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
               [name]="groupName()"
               [value]="opt.value"
               [checked]="value() === opt.value"
-              [disabled]="disabled()"
+              [disabled]="disabled() || cvaDisabled()"
               (change)="pick(opt.value)"
               (blur)="onTouched()"
             />
@@ -44,7 +46,10 @@ export class NaRadioGroup implements ControlValueAccessor {
   readonly options = input<{ value: string | number; label: string }[]>([]);
   readonly value = model<string | number | undefined>(undefined);
   readonly disabled = input(false, { transform: booleanAttribute });
-  readonly groupName = input(`na-radio-${Math.floor(Math.random() * 1e6)}`);
+  private readonly cvaDisabled = signal(false);
+  // Deterministic per-instance fallback (module counter) so SSR and client
+  // renders generate matching `name` values in the same tree order.
+  readonly groupName = input(`na-radio-${++nextRadioGroupId}`);
 
   private onChange: (v: unknown) => void = () => undefined;
   private onTouched: () => void = () => undefined;
@@ -63,7 +68,7 @@ export class NaRadioGroup implements ControlValueAccessor {
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
-  setDisabledState(): void {
-    // driven by `disabled()` input
+  setDisabledState(isDisabled: boolean): void {
+    this.cvaDisabled.set(isDisabled);
   }
 }

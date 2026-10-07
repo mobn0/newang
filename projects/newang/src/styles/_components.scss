@@ -51,12 +51,13 @@
   }
 
   // Tooltip directive: flat dark bubble, 1px border, no glow.
-  [naTooltip] {
+  // Empty tooltips (`data-na-tooltip=""` or missing) render nothing.
+  [data-na-tooltip]:not([data-na-tooltip='']) {
     position: relative;
   }
 
-  [naTooltip]:hover::after,
-  [naTooltip]:focus-visible::after {
+  [data-na-tooltip]:not([data-na-tooltip='']):hover::after,
+  [data-na-tooltip]:not([data-na-tooltip='']):focus-visible::after {
     content: attr(data-na-tooltip);
     position: absolute;
     bottom: calc(100% + 8px);

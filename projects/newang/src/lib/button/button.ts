@@ -6,6 +6,7 @@ export type NaButtonSize = 'sm' | 'md' | 'lg';
 /**
  * Opinionated button. No classes needed:
  * `<na-button variant="primary" (pressed)="save()">Save</na-button>`
+ * Defaults: `variant="primary"`, `size="md"`, `type="button"`. Pass `fullWidth` for a block button.
  */
 @Component({
   selector: 'na-button',

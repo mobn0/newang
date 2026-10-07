@@ -6,8 +6,9 @@
 /out-tsc
 /bazel-out
 
-# Generated copy of root LICENSE for the published package
+# Generated copies of root docs for the published package
 /projects/newang/LICENSE
+/projects/newang/CHANGELOG.md
 
 # Node
 /node_modules

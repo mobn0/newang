@@ -1,64 +1,102 @@
-# Newang
+# newAng (`newang`)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.0.
+Opinionated dark Angular component library. Pastel lime accent, flat static colors — no gradients, no glows. Near-zero consumer CSS: spacing, type, layout and form rhythm are baked into `na-*` components.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Install
 
 ```bash
-ng generate component component-name
+ng add newang
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+This wires the theme into `src/styles.scss`:
+
+```scss
+@use 'newang/styles' as na;
+@include na.base();
+```
+
+Manual install:
 
 ```bash
-ng generate --help
+npm i newang
 ```
 
-## Building
+## Zero-CSS usage
 
-To build the library, run:
-
-```bash
-ng build newang
+```html
+<na-app>
+  <na-page maxWidth="md">
+    <na-stack gap="lg">
+      <na-heading level="1">Sign in</na-heading>
+      <na-field label="Email" hint="Work email" error="">
+        <input naInput placeholder="you@co.com" />
+      </na-field>
+      <na-button variant="primary">Login</na-button>
+    </na-stack>
+  </na-page>
+</na-app>
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+No `class=`, no `style=`, no stylesheets. Control everything with inputs: `gap`, `size`, `tone`, `variant`, `maxWidth`, `cols`.
 
-### Publishing the Library
+## API notes
 
-Once the project is built, you can publish your library by following these steps:
+- `na-radio-group` is driven by an `options` input — there is no `na-radio` element:
+  ```html
+  <na-radio-group label="Plan" [options]="[{ value: 'free', label: 'Free' }, { value: 'pro', label: 'Pro' }]" />
+  ```
+  Binds via `[(value)]` or `formControl`. `disabled` works both as an input and via `formControl.disable()`.
+- `na-split` takes `columns`, a space-separated CSS value (default `"280px 1fr"`):
+  ```html
+  <na-split columns="280px 1fr"><div>Side</div><div>Main</div></na-split>
+  ```
+- `na-field`'s `error` only renders the message. Add `[invalid]="true"` (or `aria-invalid="true"`) to the projected `input naInput` to paint the danger border.
+- `na-button` defaults to `variant="primary"`, `size="md"`, `type="button"`; pass `fullWidth` for a block-level button.
+- `na-page` defaults to `maxWidth="md"`.
+- `na-breadcrumbs` accepts plain strings or `{ label, href }` items — items with `href` render as links.
+- `na-modal` closes on backdrop click, ✕, or `Escape` (handle `(closed)`).
+- `na-progress` clamps `value` to 0–100.
 
-1. Navigate to the `dist` directory:
+## Components
 
+| Area | Components |
+| --- | --- |
+| Actions | `na-button` |
+| Forms | `na-field`, `na-form`, `input[naInput]`, `na-switch`, `na-checkbox`, `na-radio-group` |
+| Layout | `na-app`, `na-page`, `na-stack`, `na-row`, `na-grid`, `na-split`, `na-divider`, `na-spacer` |
+| Type | `na-heading`, `na-text`, `na-link`, `na-code`, `na-empty-state` |
+| Display | `na-card`, `na-badge`, `na-alert`, `na-table`, `na-list`, `na-breadcrumbs`, `na-avatar`, `na-spinner`, `na-progress` |
+| Overlay | `na-modal`, `na-tabs`, `naTooltip` |
+| Shell | `na-header`, `na-footer`, `na-toolbar` |
+
+## Theme
+
+Dark-only for v1. Tokens live in `newang/styles` (`$na-bg`, `$na-accent`, …) as `!default` SCSS variables mirrored to `--na-*` CSS custom properties. Flat elevation via 1px borders; focus is a 2px lime `outline`. Stylelint bans `linear-gradient`, `box-shadow` (except `none`), `text-shadow` and `drop-shadow`.
+
+## Releases
+
+Every push to `main` runs CI (stylelint, build, tests) then `semantic-release`: conventional commits → version bump → CHANGELOG → GitHub Release → `npm publish`.
+
+Use [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `docs:`, `chore:` …
+
+Publishing uses **npm OIDC trusted publishing** — no long-lived tokens, no rotation, plus provenance attestation. Two one-time setup steps (npm classic tokens are revoked and granular bypass-2FA tokens are being phased out, so tokens are not an option):
+
+1. **Manual first publish** (needs your interactive login/2FA — CI can never do the first one):
    ```bash
-   cd dist/newang
+   npm ci
+   npm run build
+   cd dist/newang && npm publish --access public
    ```
+   Then anyone can run `ng add newang` to get the latest release.
+2. **npmjs.com → `newang` package → Settings → Trusted Publishers → Manage Trusted Publishers → GitHub Actions**: organization/user `mobn0`, repository `newang`, workflow file `release.yml`, no environment.
 
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
+After that, every `feat:`/`fix:` push publishes automatically with zero secrets to manage.
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Develop
 
 ```bash
-ng test
+npm ci
+npm run build
+npm run test
+npm run lint:style
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

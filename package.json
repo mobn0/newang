@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "cp LICENSE projects/newang/LICENSE && ng build newang",
-    "build:lib": "cp LICENSE projects/newang/LICENSE && ng build newang",
+    "build": "cp LICENSE projects/newang/LICENSE && cp README.md projects/newang/README.md && cp CHANGELOG.md projects/newang/CHANGELOG.md && ng build newang",
+    "build:lib": "cp LICENSE projects/newang/LICENSE && cp README.md projects/newang/README.md && cp CHANGELOG.md projects/newang/CHANGELOG.md && ng build newang",
     "watch": "ng build newang --watch --configuration development",
     "test": "ng test newang --watch=false",
     "test:lib": "ng test newang --watch=false",

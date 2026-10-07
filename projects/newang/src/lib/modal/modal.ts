@@ -6,6 +6,9 @@ import { ChangeDetectionStrategy, Component, booleanAttribute, input, output } f
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './modal.scss',
+  host: {
+    '(window:keydown)': 'onWindowKeydown($event)',
+  },
   template: `
     @if (open()) {
       <div class="na-modal__overlay" (click)="closed.emit()">
@@ -30,4 +33,8 @@ export class NaModal {
   readonly title = input('Dialog');
   readonly open = input(false, { transform: booleanAttribute });
   readonly closed = output<void>();
+
+  onWindowKeydown(e: KeyboardEvent): void {
+    if (e.key === 'Escape' && this.open()) this.closed.emit();
+  }
 }

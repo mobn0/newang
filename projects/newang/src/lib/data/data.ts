@@ -5,6 +5,11 @@ export interface NaTableColumn {
   header: string;
 }
 
+export interface NaBreadcrumb {
+  label: string;
+  href?: string;
+}
+
 /**
  * Pre-styled table with empty state. No CSS needed:
  * `<na-table [columns]="[{key:'name',header:'Name'}]" [rows]="[{name:'Ada'}]" />`
@@ -59,7 +64,7 @@ export class NaTable {
 })
 export class NaList {}
 
-/** Breadcrumbs with lime current page. */
+/** Breadcrumbs with lime current page. Plain strings render as text; `{label, href}` items render as links. */
 @Component({
   selector: 'na-breadcrumbs',
   standalone: true,
@@ -67,21 +72,27 @@ export class NaList {}
   styleUrl: './data.scss',
   template: `
     <nav class="na-crumbs" aria-label="Breadcrumb">
-      @for (crumb of items(); track $index) {
+      @for (crumb of normalized(); track $index) {
         @if ($index > 0) {
           <span class="na-crumbs__sep" aria-hidden="true">/</span>
         }
-        @if ($index === items().length - 1) {
-          <span class="na-crumbs__current" aria-current="page">{{ crumb }}</span>
+        @if ($index === normalized().length - 1) {
+          <span class="na-crumbs__current" aria-current="page">{{ crumb.label }}</span>
+        } @else if (crumb.href) {
+          <a class="na-crumbs__item na-crumbs__link" [href]="crumb.href">{{ crumb.label }}</a>
         } @else {
-          <span class="na-crumbs__item">{{ crumb }}</span>
+          <span class="na-crumbs__item">{{ crumb.label }}</span>
         }
       }
     </nav>
   `,
 })
 export class NaBreadcrumbs {
-  readonly items = input<string[]>([]);
+  readonly items = input<(string | NaBreadcrumb)[]>([]);
+
+  normalized(): NaBreadcrumb[] {
+    return this.items().map((c) => (typeof c === 'string' ? { label: c } : c));
+  }
 }
 
 /** Inline spinner — flat lime ring, no glow. */
@@ -96,7 +107,7 @@ export class NaSpinner {
   readonly label = input('Loading');
 }
 
-/** Flat progress bar — solid lime fill, no gradient. */
+/** Flat progress bar — solid lime fill, no gradient. `value` is clamped to 0–100. */
 @Component({
   selector: 'na-progress',
   standalone: true,
@@ -106,14 +117,20 @@ export class NaSpinner {
     <div
       class="na-progress"
       role="progressbar"
-      [attr.aria-valuenow]="value()"
+      [attr.aria-valuenow]="clamped()"
       aria-valuemin="0"
       aria-valuemax="100"
     >
-      <div class="na-progress__fill" [style.width.%]="value()"></div>
+      <div class="na-progress__fill" [style.width.%]="clamped()"></div>
     </div>
   `,
 })
 export class NaProgress {
   readonly value = input(0, { transform: numberAttribute });
+
+  clamped(): number {
+    const v = this.value();
+    if (Number.isNaN(v)) return 0;
+    return Math.min(100, Math.max(0, v));
+  }
 }

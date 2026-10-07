@@ -20,7 +20,9 @@ export class NaAvatar {
 
   initials(): string {
     return this.name()
-      .split(' ')
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
       .map((p) => p[0])
       .slice(0, 2)
       .join('')

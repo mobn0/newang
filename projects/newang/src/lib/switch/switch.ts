@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, booleanAttribute, forwardRef, input, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, booleanAttribute, forwardRef, input, model, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /** Lime toggle. Works with `[(checked)]` or `formControl`. */
@@ -16,7 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         type="checkbox"
         class="na-switch__input"
         [checked]="checked()"
-        [disabled]="disabled()"
+        [disabled]="disabled() || cvaDisabled()"
         (change)="onInput($event)"
         (blur)="onTouched()"
       />
@@ -31,6 +31,7 @@ export class NaSwitch implements ControlValueAccessor {
   readonly label = input('');
   readonly checked = model(false);
   readonly disabled = input(false, { transform: booleanAttribute });
+  private readonly cvaDisabled = signal(false);
 
   private onChange: (v: boolean) => void = () => undefined;
   private onTouched: () => void = () => undefined;
@@ -50,7 +51,7 @@ export class NaSwitch implements ControlValueAccessor {
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
-  setDisabledState(_isDisabled: boolean): void {
-    // driven by `disabled()` input; form API maps here in future if needed
+  setDisabledState(isDisabled: boolean): void {
+    this.cvaDisabled.set(isDisabled);
   }
 }

@@ -65,6 +65,17 @@
   color: var(--na-text-muted, t.$na-text-muted);
 }
 
+.na-crumbs__link {
+  color: var(--na-text-muted, t.$na-text-muted);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--na-text, t.$na-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
 .na-crumbs__sep {
   color: var(--na-text-faint, t.$na-text-faint);
 }

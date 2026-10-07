@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, input, numberAttribute } from '@ang
 })
 export class NaApp {}
 
-/** Centered page column. `<na-page maxWidth="md">…</na-page>` */
+/** Centered page column. `<na-page maxWidth="md">…</na-page>` (default `"md"`). */
 @Component({
   selector: 'na-page',
   standalone: true,
@@ -67,7 +67,7 @@ export class NaGrid {
   readonly gap = input<'xs' | 'sm' | 'md' | 'lg' | 'xl'>('md');
 }
 
-/** Two-pane split that stacks on mobile. `<na-split ratio="280px_1fr">` */
+/** Two-pane split that stacks on mobile. `<na-split columns="280px 1fr">` (space-separated CSS value). */
 @Component({
   selector: 'na-split',
   standalone: true,

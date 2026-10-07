@@ -24,6 +24,11 @@
       "input": ".",
       "glob": "LICENSE",
       "output": "."
+    },
+    {
+      "input": ".",
+      "glob": "CHANGELOG.md",
+      "output": "."
     }
   ]
 }

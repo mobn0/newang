@@ -2,7 +2,11 @@ import { ChangeDetectionStrategy, Component, booleanAttribute, input } from '@an
 
 /**
  * Opinionated field wrapper — label, hint and error spacing baked in.
- * `<na-field label="Email" hint="Work email" error="Invalid"><input naInput /></na-field>`
+ * `<na-field label="Email" hint="Work email" error="Invalid"><input naInput [invalid]="true" /></na-field>`
+ *
+ * Note: `error` only renders the message. Set `[invalid]="true"` (or
+ * `aria-invalid="true"`) on the projected `naInput` to also paint the
+ * danger border — the wrapper cannot reach into projected content itself.
  */
 @Component({
   selector: 'na-field',
