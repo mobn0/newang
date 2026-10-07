@@ -1,3 +1,9 @@
+## [1.0.4](https://github.com/mobn0/newang/compare/v1.0.3...v1.0.4) (2026-10-07)
+
+### Bug Fixes
+
+* repair ng-add schematic, packaging, docs, forms and a11y gaps ([e78edcf](https://github.com/mobn0/newang/commit/e78edcf7686e1a4d2d2b9f2c734ae0dbeb33f047))
+
 ## [1.0.3](https://github.com/mobn0/newang/compare/v1.0.2...v1.0.3) (2026-10-07)
 
 ### Bug Fixes
