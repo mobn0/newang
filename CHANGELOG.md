@@ -1,3 +1,9 @@
+## [1.0.3](https://github.com/mobn0/newang/compare/v1.0.2...v1.0.3) (2026-10-07)
+
+### Bug Fixes
+
+* coerce scalar inputs so static attributes like level="1" type-check ([5217e91](https://github.com/mobn0/newang/commit/5217e912bdcfa8b7107b5aaabf8d08bf0df94e76))
+
 ## [1.0.2](https://github.com/mobn0/newang/compare/v1.0.1...v1.0.2) (2026-10-07)
 
 ### Bug Fixes
