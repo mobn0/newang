@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/mobn0/newang/compare/v1.1.0...v1.2.0) (2026-10-07)
+
+### Features
+
+* header gutters with maxWidth, full token vars, square exemptions ([257c8db](https://github.com/mobn0/newang/commit/257c8dbe2e7703abc62023157dd4ec7537fcc304))
+
 ## [1.1.0](https://github.com/mobn0/newang/compare/v1.0.4...v1.1.0) (2026-10-07)
 
 ### Features
