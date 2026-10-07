@@ -1,3 +1,9 @@
+## [1.0.2](https://github.com/mobn0/newang/compare/v1.0.1...v1.0.2) (2026-10-07)
+
+### Bug Fixes
+
+* use canonical git+ repository url to silence npm publish warning ([9cc2453](https://github.com/mobn0/newang/commit/9cc245368f9be5a101a09ba1c33085dfb5ce6169))
+
 ## [1.0.1](https://github.com/mobn0/newang/compare/v1.0.0...v1.0.1) (2026-10-07)
 
 ### Bug Fixes
