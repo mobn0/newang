@@ -48,8 +48,14 @@ jobs:
       - name: Publish package to npm via OIDC
         run: |
           VERSION=$(node -p "require('./dist/newang/package.json').version")
+          echo "dist version: '${VERSION}'"
+          if [ -z "${VERSION}" ]; then
+            echo "Could not resolve the dist version — refusing to publish blind." >&2
+            exit 1
+          fi
           if npm view "newang@${VERSION}" version >/dev/null 2>&1; then
             echo "newang@${VERSION} is already on npm — skipping publish."
           else
+            echo "Publishing newang@${VERSION}…"
             npm publish ./dist/newang --provenance --tag latest
           fi
