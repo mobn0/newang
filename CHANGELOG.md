@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/mobn0/newang/compare/v1.0.4...v1.1.0) (2026-10-07)
+
+### Features
+
+* square corners, neutral charcoal palette, bar-less alerts ([5f179a1](https://github.com/mobn0/newang/commit/5f179a1739e92acac4ade374d5b401d180b92420))
+
 ## [1.0.4](https://github.com/mobn0/newang/compare/v1.0.3...v1.0.4) (2026-10-07)
 
 ### Bug Fixes
