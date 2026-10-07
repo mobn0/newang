@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mobn0/newang.git"
+    "url": "git+https://github.com/mobn0/newang.git"
   },
   "homepage": "https://github.com/mobn0/newang#readme",
   "publishConfig": {
