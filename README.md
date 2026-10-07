@@ -61,7 +61,18 @@ Every push to `main` runs CI (stylelint, build, tests) then `semantic-release`: 
 
 Use [Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `docs:`, `chore:` …
 
-Setup: add an npm Automation token as repo secret `NPM_TOKEN`. Then anyone can run `ng add newang` to get the latest release.
+Publishing uses **npm OIDC trusted publishing** — no long-lived tokens, no rotation, plus provenance attestation. Two one-time setup steps (npm classic tokens are revoked and granular bypass-2FA tokens are being phased out, so tokens are not an option):
+
+1. **Manual first publish** (needs your interactive login/2FA — CI can never do the first one):
+   ```bash
+   npm ci
+   npm run build
+   cd dist/newang && npm publish --access public
+   ```
+   Then anyone can run `ng add newang` to get the latest release.
+2. **npmjs.com → `newang` package → Settings → Trusted Publishers → Manage Trusted Publishers → GitHub Actions**: organization/user `mobn0`, repository `newang`, workflow file `release.yml`, no environment.
+
+After that, every `feat:`/`fix:` push publishes automatically with zero secrets to manage.
 
 ## Develop
 

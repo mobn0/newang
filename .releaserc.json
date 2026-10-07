@@ -21,5 +21,6 @@
       }
     ]
   ],
-  "pkgRoot": "dist/newang"
+  "pkgRoot": "dist/newang",
+  "npmPublish": false
 }
