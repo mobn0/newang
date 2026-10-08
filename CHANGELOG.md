@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/mobn0/newang/compare/v1.2.1...v1.3.0) (2026-10-08)
+
+### Features
+
+* unify the library on shared type, control and motion tokens ([6be5f77](https://github.com/mobn0/newang/commit/6be5f774609b8d96ff93ebce1aa63e0d293b6d66))
+
 ## [1.2.1](https://github.com/mobn0/newang/compare/v1.2.0...v1.2.1) (2026-10-08)
 
 ### Bug Fixes
