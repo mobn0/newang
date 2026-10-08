@@ -11,6 +11,17 @@
   justify-content: center;
   overflow: hidden;
   flex: none;
+  box-sizing: border-box;
+}
+
+:host(.na-avatar--sm) {
+  width: 28px;
+  height: 28px;
+}
+
+:host(.na-avatar--lg) {
+  width: 48px;
+  height: 48px;
 }
 
 .na-avatar__img {

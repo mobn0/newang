@@ -29,6 +29,9 @@
     },
     {
       "path": "./projects/newang/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/showcase/tsconfig.app.json"
     }
   ]
 }

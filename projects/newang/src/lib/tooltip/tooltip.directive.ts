@@ -24,11 +24,18 @@ export class NaTooltip {
   @HostBinding('attr.tabindex')
   get tabbable(): number | null {
     if (!this.naTooltip()) return null;
-    return isNativelyFocusable(this.el.nativeElement) ? null : 0;
+    // Component hosts (e.g. <na-button naTooltip>) are custom elements: the
+    // inner native control already takes a tab stop, so adding another one
+    // on the host would trap keyboard users on a dead stop.
+    const el = this.el.nativeElement;
+    if (isNativelyFocusable(el) || hasFocusableDescendant(el)) return null;
+    return 0;
   }
 }
 
 const FOCUSABLE_TAGS = new Set(['button', 'input', 'select', 'textarea']);
+const FOCUSABLE_DESCENDANT =
+  'button, a[href], input, select, textarea, audio[controls], video[controls], [contenteditable], [tabindex]';
 
 function isNativelyFocusable(el: HTMLElement): boolean {
   const tag = el.tagName.toLowerCase();
@@ -37,4 +44,8 @@ function isNativelyFocusable(el: HTMLElement): boolean {
   if (tag === 'audio' || tag === 'video') return el.hasAttribute('controls');
   if (el.hasAttribute('contenteditable')) return true;
   return false;
+}
+
+function hasFocusableDescendant(el: HTMLElement): boolean {
+  return el.querySelector(FOCUSABLE_DESCENDANT) !== null;
 }

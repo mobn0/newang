@@ -103,3 +103,16 @@ npm run build
 npm run test
 npm run lint:style
 ```
+
+Visual tests: `projects/showcase` is a mock-site app (landing, dashboard,
+sign-in, full component gallery) exercised by Playwright, everything in
+Docker — see `e2e/run.mjs`:
+
+```bash
+docker network create newang-e2e
+docker build -f e2e/Dockerfile.showcase -t newang-showcase .
+docker build -f e2e/Dockerfile.e2e -t newang-e2e .
+docker run -d --name showcase --network newang-e2e newang-showcase
+docker run --rm --network newang-e2e -e BASE_URL=http://showcase \
+  -v ./e2e/results:/results newang-e2e
+```

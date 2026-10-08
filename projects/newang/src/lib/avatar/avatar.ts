@@ -5,6 +5,10 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './avatar.scss',
+  host: {
+    '[class.na-avatar--sm]': "size() === 'sm'",
+    '[class.na-avatar--lg]': "size() === 'lg'",
+  },
   template: `
     @if (src()) {
       <img class="na-avatar__img" [src]="src()" [alt]="name()" />

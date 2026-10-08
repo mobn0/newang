@@ -1,0 +1,10 @@
+# Playwright runner image: official browsers + the e2e script.
+# Base image tag and npm package are pinned together via PLAYWRIGHT_VERSION.
+# Run: docker run --network <net> -e BASE_URL=http://showcase -v ./e2e/results:/results newang-e2e
+ARG PLAYWRIGHT_VERSION=1.64.0
+FROM mcr.microsoft.com/playwright:v${PLAYWRIGHT_VERSION}-jammy
+WORKDIR /e2e
+COPY e2e/package.json e2e/run.mjs ./
+RUN npm i --no-audit --no-fund "playwright@${PLAYWRIGHT_VERSION}"
+ENV BASE_URL=http://showcase OUT=/results
+CMD ["node", "run.mjs"]

@@ -1,24 +1,31 @@
 import { ChangeDetectionStrategy, Component, input, numberAttribute } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 
-/** `<na-heading level="1">Title</na-heading>` — size/weight/margins baked in. */
+/** `<na-heading level="1">Title</na-heading>` — size/weight/margins baked in.
+ * Content projects through a single shared slot stamped into whichever
+ * level renders (multiple `<ng-content>` across switch branches would only
+ * ever fill one of them).
+ */
 @Component({
   selector: 'na-heading',
   standalone: true,
+  imports: [NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './typography.scss',
   template: `
+    <ng-template #body><ng-content /></ng-template>
     @switch (level()) {
       @case (1) {
-        <h1 class="na-h na-h1"><ng-content /></h1>
+        <h1 class="na-h na-h1"><ng-container [ngTemplateOutlet]="body" /></h1>
       }
       @case (3) {
-        <h3 class="na-h na-h3"><ng-content /></h3>
+        <h3 class="na-h na-h3"><ng-container [ngTemplateOutlet]="body" /></h3>
       }
       @case (4) {
-        <h4 class="na-h na-h4"><ng-content /></h4>
+        <h4 class="na-h na-h4"><ng-container [ngTemplateOutlet]="body" /></h4>
       }
       @default {
-        <h2 class="na-h na-h2"><ng-content /></h2>
+        <h2 class="na-h na-h2"><ng-container [ngTemplateOutlet]="body" /></h2>
       }
     }
   `,

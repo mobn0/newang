@@ -1,0 +1,8 @@
+{
+  "name": "newang-e2e",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "playwright": "latest"
+  }
+}

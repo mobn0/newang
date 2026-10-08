@@ -6,6 +6,9 @@
 /out-tsc
 /bazel-out
 
+# Playwright run artifacts (screenshots + summary land here via volume mount)
+/e2e/results
+
 # Generated copies of root docs for the published package
 /projects/newang/LICENSE
 /projects/newang/CHANGELOG.md

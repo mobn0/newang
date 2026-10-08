@@ -1,0 +1,35 @@
+// Consumer entry: the whole library theme in two lines.
+@use 'newang/styles' as na;
+@include na.base();
+
+// Tiny showcase-only helpers (docs chrome, not part of the library).
+.show-nav {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.show-link {
+  color: var(--na-text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 12px;
+}
+
+.show-link:hover {
+  color: var(--na-text);
+}
+
+.show-link--active {
+  color: var(--na-accent);
+}
+
+.demo-box {
+  background: var(--na-surface-2);
+  border: 1px solid var(--na-border);
+  padding: 16px;
+  font-size: 13px;
+  color: var(--na-text-muted);
+  box-sizing: border-box;
+}
