@@ -11,10 +11,12 @@
   gap: t.$na-space-md;
   flex-wrap: wrap;
   box-sizing: border-box;
-  padding-inline: t.$na-space-md;
-  padding-bottom: t.$na-space-md;
+  // Symmetric chrome: the bar owns its edge padding on all four sides, so
+  // the title never touches the viewport. The gap below the hairline comes
+  // from na-page padding alone — never doubled with a header margin.
+  padding: t.$na-space-md;
   border-bottom: 1px solid var(--na-border, t.$na-border);
-  margin-bottom: t.$na-space-md;
+  margin-bottom: 0;
 }
 
 // Optional content caps matching na-page widths — shell aligns with page.
@@ -53,6 +55,7 @@
   overflow-wrap: anywhere;
   font-size: var(--na-fs-xl, t.$na-fs-xl);
   font-weight: var(--na-weight-bold, t.$na-weight-bold);
+  line-height: 1.25;
   color: var(--na-text, t.$na-text);
 }
 
@@ -89,10 +92,11 @@
   justify-content: space-between;
   flex-wrap: wrap;
   box-sizing: border-box;
-  padding-inline: t.$na-space-md;
-  padding-top: t.$na-space-md;
+  // Mirrors the header: own edge padding on all sides, no outer margin —
+  // the gap above the hairline comes from na-page padding alone.
+  padding: t.$na-space-md;
   border-top: 1px solid var(--na-border, t.$na-border);
-  margin-top: t.$na-space-md;
+  margin-top: 0;
   font-size: var(--na-fs-sm, t.$na-fs-sm);
   color: var(--na-text-muted, t.$na-text-muted);
 }

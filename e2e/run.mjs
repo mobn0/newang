@@ -346,15 +346,23 @@ checkJsErrors('gallery', galleryErrors);
       const titles = header.querySelector('.na-header__titles').getBoundingClientRect();
       const actions = header.querySelector('.na-header__actions').getBoundingClientRect();
       const bar = header.getBoundingClientRect();
-      const padR = parseFloat(getComputedStyle(header).paddingRight);
+      const hs = getComputedStyle(header);
+      const page = document.querySelector('na-page .na-page');
+      const footer = document.querySelector('na-footer .na-footer');
       return {
         leftGutter: +(titles.left - bar.left).toFixed(1),
         rightGutter: +(bar.right - actions.right).toFixed(1),
-        rightOverflow: +Math.max(0, actions.right - (bar.right - padR)).toFixed(1),
+        rightOverflow: +Math.max(0, actions.right - (bar.right - parseFloat(hs.paddingRight))).toFixed(1),
         actionsInset: +(actions.left - bar.left).toFixed(1),
         stacked: actions.top >= titles.bottom - 0.5,
         collide: actions.top < titles.bottom - 0.5 && titles.right > actions.left + 0.5,
         centreDelta: +Math.abs((titles.top + titles.bottom) / 2 - (actions.top + actions.bottom) / 2).toFixed(1),
+        // Frame rhythm: bar owns its edge padding; the gaps around na-page
+        // must be exactly one section step (32), never doubled.
+        topPad: parseFloat(hs.paddingTop),
+        hairlineGap: +(page.firstElementChild.getBoundingClientRect().top - bar.bottom).toFixed(1),
+        footerGap: +(footer.getBoundingClientRect().top - page.lastElementChild.getBoundingClientRect().bottom).toFixed(1),
+        footerPadBottom: parseFloat(getComputedStyle(footer).paddingBottom),
         scrollW: document.documentElement.scrollWidth,
         innerW: window.innerWidth,
       };
@@ -364,6 +372,10 @@ checkJsErrors('gallery', galleryErrors);
     if (m.scrollW > m.innerW) fail(`${tag} overflow`, `scrollWidth ${m.scrollW} > ${m.innerW}`);
     if (m.rightOverflow > 1.5) fail(`${tag} overflow-right`, `actions exceed content box by ${m.rightOverflow}px`);
     if (m.collide) fail(`${tag} collide`, 'title and actions overlap');
+    if (Math.abs(m.topPad - 16) > 1.5) fail(`${tag} top-pad`, `${m.topPad}px, expected 16`);
+    if (Math.abs(m.hairlineGap - 32) > 1.5) fail(`${tag} hairline-gap`, `${m.hairlineGap}px, expected 32`);
+    if (Math.abs(m.footerGap - 32) > 1.5) fail(`${tag} footer-gap`, `${m.footerGap}px, expected 32`);
+    if (Math.abs(m.footerPadBottom - 16) > 1.5) fail(`${tag} footer-pad`, `${m.footerPadBottom}px, expected 16`);
     if (m.stacked) {
       if (Math.abs(m.actionsInset - 16) > 1.5) fail(`${tag} stacked-inset`, `${m.actionsInset}px, expected 16`);
     } else {

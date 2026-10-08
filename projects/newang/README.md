@@ -54,7 +54,7 @@ No `class=`, no `style=`, no stylesheets. Control everything with inputs: `gap`,
 - `na-button` defaults to `variant="primary"`, `size="md"`, `type="button"`; pass `fullWidth` for a block-level button. `loading` and `disabled` both render a flat inactive surface — the lime accent is reserved for live primary actions.
 - `na-form` is a flat layout wrapper (fields + action row with a hairline). It has no surface or border of its own, so nesting it in `na-card` never produces a box inside a box.
 - `na-page` defaults to `maxWidth="md"`.
-- `na-header`/`na-footer` ship with 16px side gutters and default to `maxWidth="full"`; pass `sm`/`md`/`lg` to cap content to the `na-page` widths so shell aligns with page.
+- `na-header`/`na-footer` ship with 16px edge padding on all sides and default to `maxWidth="full"`; pass `sm`/`md`/`lg` to cap content to the `na-page` widths so shell aligns with page. They carry no outer margins: in the `header → page → footer` composition the section gaps come from `na-page` padding alone (32px), never doubled.
 - `na-header` centres its actions slot against the whole title block (title plus subtitle). Below 768px the bar stacks: title first, actions beneath it. Long titles wrap rather than pushing actions out. The bottom hairline uses `--na-border`.
 - `na-breadcrumbs` accepts plain strings or `{ label, href }` items — items with `href` render as links.
 - `na-modal` closes on backdrop click, ✕, or `Escape` (handle `(closed)`).
