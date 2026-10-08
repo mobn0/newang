@@ -1,3 +1,9 @@
+## [1.3.2](https://github.com/mobn0/newang/compare/v1.3.1...v1.3.2) (2026-10-08)
+
+### Bug Fixes
+
+* single 32px frame rhythm for header, page and footer ([cf90b44](https://github.com/mobn0/newang/commit/cf90b44afddaccf3cf9b6122827a6a4a21391cf7))
+
 ## [1.3.1](https://github.com/mobn0/newang/compare/v1.3.0...v1.3.1) (2026-10-08)
 
 ### Bug Fixes
