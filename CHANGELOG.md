@@ -1,3 +1,9 @@
+## [1.3.1](https://github.com/mobn0/newang/compare/v1.3.0...v1.3.1) (2026-10-08)
+
+### Bug Fixes
+
+* centre header actions, stack below 768px, wrap long titles ([ce2fabc](https://github.com/mobn0/newang/commit/ce2fabc4aa9fe912c2ce53b3876540726d643dd4))
+
 ## [1.3.0](https://github.com/mobn0/newang/compare/v1.2.1...v1.3.0) (2026-10-08)
 
 ### Features
