@@ -1,3 +1,9 @@
+## [1.2.1](https://github.com/mobn0/newang/compare/v1.2.0...v1.2.1) (2026-10-08)
+
+### Bug Fixes
+
+* heading projection, avatar sizes, tooltip host tabindex ([5797a44](https://github.com/mobn0/newang/commit/5797a44462db2684a4bf7773441b0ebed015880e))
+
 ## [1.2.0](https://github.com/mobn0/newang/compare/v1.1.0...v1.2.0) (2026-10-07)
 
 ### Features
