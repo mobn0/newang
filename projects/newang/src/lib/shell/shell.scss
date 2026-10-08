@@ -6,7 +6,7 @@
 
 .na-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: t.$na-space-md;
   flex-wrap: wrap;
@@ -43,8 +43,14 @@
   margin-inline: auto;
 }
 
+// Long unbroken titles wrap inside the bar instead of pushing the actions out.
+.na-header__titles {
+  min-width: 0;
+}
+
 .na-header__title {
   margin: 0;
+  overflow-wrap: anywhere;
   font-size: var(--na-fs-xl, t.$na-fs-xl);
   font-weight: var(--na-weight-bold, t.$na-weight-bold);
   color: var(--na-text, t.$na-text);
@@ -52,6 +58,7 @@
 
 .na-header__subtitle {
   margin: t.$na-space-xs 0 0;
+  overflow-wrap: anywhere;
   font-size: var(--na-fs-sm, t.$na-fs-sm);
   color: var(--na-text-muted, t.$na-text-muted);
 }
@@ -61,6 +68,18 @@
   gap: t.$na-space-sm;
   align-items: center;
   flex-wrap: wrap;
+  min-width: 0;
+  max-width: 100%;
+}
+
+// Narrow viewports stack the bar: title first, actions full width beneath.
+// Same breakpoint as na-grid and na-split.
+@media (max-width: 768px) {
+  .na-header {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
 }
 
 .na-footer {

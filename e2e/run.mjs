@@ -333,6 +333,101 @@ checkJsErrors('gallery', galleryErrors);
   ok('control alignment');
 }
 
+// --- 4b. shell header across viewports --------------------------------------
+// Exact usage under review: na-header maxWidth="full" with an na-row in the
+// actions slot. Measures gutters, vertical centring, stacking and overflow.
+{
+  const headerRuns = {};
+  for (const width of [1440, 1024, 900, 768, 390]) {
+    const vp = await browser.newPage({ viewport: { width, height: 900 } });
+    await vp.goto(`${BASE}/`, { waitUntil: 'networkidle' });
+    const m = await vp.evaluate(() => {
+      const header = document.querySelector('na-header .na-header');
+      const titles = header.querySelector('.na-header__titles').getBoundingClientRect();
+      const actions = header.querySelector('.na-header__actions').getBoundingClientRect();
+      const bar = header.getBoundingClientRect();
+      const padR = parseFloat(getComputedStyle(header).paddingRight);
+      return {
+        leftGutter: +(titles.left - bar.left).toFixed(1),
+        rightGutter: +(bar.right - actions.right).toFixed(1),
+        rightOverflow: +Math.max(0, actions.right - (bar.right - padR)).toFixed(1),
+        actionsInset: +(actions.left - bar.left).toFixed(1),
+        stacked: actions.top >= titles.bottom - 0.5,
+        collide: actions.top < titles.bottom - 0.5 && titles.right > actions.left + 0.5,
+        centreDelta: +Math.abs((titles.top + titles.bottom) / 2 - (actions.top + actions.bottom) / 2).toFixed(1),
+        scrollW: document.documentElement.scrollWidth,
+        innerW: window.innerWidth,
+      };
+    });
+    headerRuns[width] = m;
+    const tag = `header@${width}`;
+    if (m.scrollW > m.innerW) fail(`${tag} overflow`, `scrollWidth ${m.scrollW} > ${m.innerW}`);
+    if (m.rightOverflow > 1.5) fail(`${tag} overflow-right`, `actions exceed content box by ${m.rightOverflow}px`);
+    if (m.collide) fail(`${tag} collide`, 'title and actions overlap');
+    if (m.stacked) {
+      if (Math.abs(m.actionsInset - 16) > 1.5) fail(`${tag} stacked-inset`, `${m.actionsInset}px, expected 16`);
+    } else {
+      if (Math.abs(m.leftGutter - 16) > 1.5) fail(`${tag} left-gutter`, `${m.leftGutter}px, expected 16`);
+      if (Math.abs(m.rightGutter - 16) > 1.5) fail(`${tag} right-gutter`, `${m.rightGutter}px, expected 16`);
+      if (m.centreDelta > 1.5) fail(`${tag} centring`, `${m.centreDelta}px off-centre`);
+    }
+    await vp.locator('na-header').screenshot({ path: `${OUT}/header-${width}.png` });
+    await vp.close();
+  }
+  measures.header = headerRuns;
+  console.log('header metrics:', JSON.stringify(headerRuns));
+  ok('header across viewports');
+
+  // Long unbroken title: must wrap inside the bar, not overflow or overlap actions.
+  const longRuns = {};
+  for (const width of [1440, 390]) {
+    const vp = await browser.newPage({ viewport: { width, height: 900 } });
+    await vp.goto(`${BASE}/gallery`, { waitUntil: 'networkidle' });
+    const m = await vp.evaluate(() => {
+      const host = document.querySelector('#header-long');
+      const titles = host.querySelector('.na-header__titles').getBoundingClientRect();
+      const actions = host.querySelector('.na-header__actions').getBoundingClientRect();
+      return {
+        titlesRight: +titles.right.toFixed(1),
+        actionsRight: +actions.right.toFixed(1),
+        collide: actions.top < titles.bottom - 0.5 && titles.right > actions.left + 0.5,
+        innerW: window.innerWidth,
+      };
+    });
+    longRuns[width] = m;
+    const tag = `header-long@${width}`;
+    if (m.titlesRight > m.innerW + 0.5) fail(`${tag} overflow`, `title box ends at ${m.titlesRight} > ${m.innerW}`);
+    if (m.actionsRight > m.innerW + 0.5) fail(`${tag} overflow`, `actions end at ${m.actionsRight} > ${m.innerW}`);
+    if (m.collide) fail(`${tag} collide`, 'title and actions overlap');
+    await vp.locator('#header-long').screenshot({ path: `${OUT}/header-long-${width}.png` });
+    await vp.close();
+  }
+  measures.headerLong = longRuns;
+  console.log('header-long metrics:', JSON.stringify(longRuns));
+  ok('header long title');
+
+  // Bottom hairline must be token-driven: overriding --na-border has to repaint it.
+  const p = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  await p.goto(`${BASE}/`, { waitUntil: 'networkidle' });
+  const hairline = await p.evaluate(() => {
+    const header = document.querySelector('na-header .na-header');
+    const footer = document.querySelector('na-footer .na-footer');
+    const root = document.documentElement;
+    const read = () => [getComputedStyle(header).borderBottomColor, getComputedStyle(footer).borderTopColor];
+    const before = read();
+    root.style.setProperty('--na-border', 'rgb(255, 0, 0)');
+    const overridden = read();
+    root.style.removeProperty('--na-border');
+    return { before, overridden };
+  });
+  measures.hairline = hairline;
+  if (!hairline.overridden.every((c) => c === 'rgb(255, 0, 0)')) {
+    fail('hairline', `not token-driven: ${JSON.stringify(hairline)}`);
+  }
+  await p.close();
+  ok('hairline token');
+}
+
 // --- 5. per-section close-ups for visual review -----------------------------
 for (const sec of ['sec-buttons', 'sec-forms', 'sec-type', 'sec-display', 'sec-layout', 'sec-overlay']) {
   await page.locator(`#${sec}`).screenshot({ path: `${OUT}/${sec}.png` });

@@ -14,6 +14,7 @@ import {
   NaField,
   NaForm,
   NaGrid,
+  NaHeader,
   NaHeading,
   NaInput,
   NaLink,
@@ -54,6 +55,7 @@ import {
     NaField,
     NaInput,
     NaForm,
+    NaHeader,
     NaSwitch,
     NaCheckbox,
     NaRadioGroup,
@@ -247,6 +249,14 @@ import {
 
       <section id="sec-shell"><na-stack gap="md">
         <na-heading level="2">Shell</na-heading>
+        <na-header
+          id="header-long"
+          title="Supercalifragilisticexpialidocious_identifier_without_any_spaces_to_force_wrapping_behaviour"
+          subtitle="Long titles wrap inside the bar and never push the actions off-canvas."
+          maxWidth="full"
+        >
+          <na-button size="sm" variant="secondary">Edit</na-button>
+        </na-header>
         <na-toolbar>
           <na-button size="sm" variant="secondary">Cut</na-button>
           <na-button size="sm" variant="secondary">Copy</na-button>
