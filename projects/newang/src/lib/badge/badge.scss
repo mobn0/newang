@@ -8,11 +8,11 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: t.$na-font;
-  font-size: 12px;
-  font-weight: 600;
+  font-family: var(--na-font, t.$na-font);
   line-height: 1;
   padding: 5px 10px;
+  font-size: var(--na-fs-xs, t.$na-fs-xs);
+  font-weight: var(--na-weight-semibold, t.$na-weight-semibold);
   border-radius: var(--na-radius-sm, t.$na-radius-sm);
   border: 1px solid var(--na-border, t.$na-border);
   background: var(--na-surface-2, t.$na-surface-2);

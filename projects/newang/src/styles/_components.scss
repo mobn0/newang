@@ -7,19 +7,23 @@
   .na-input {
     width: 100%;
     box-sizing: border-box;
-    font-family: t.$na-font;
-    font-size: 14px;
+    font-family: var(--na-font, t.$na-font);
+    font-size: var(--na-fs-md, t.$na-fs-md);
     line-height: 1.5;
     color: var(--na-text, t.$na-text);
     background: var(--na-surface-1, t.$na-surface-1);
     border: 1px solid var(--na-border, t.$na-border);
     border-radius: var(--na-radius-md, t.$na-radius-md);
-    padding: 10px 14px;
+    height: var(--na-control-h-md, t.$na-control-h-md);
+    padding: 0 14px;
     box-shadow: none;
+    transition: border-color var(--na-dur, t.$na-dur) ease;
   }
 
   textarea.na-input {
+    height: auto;
     min-height: 96px;
+    padding: 10px 14px;
     resize: vertical;
   }
 
@@ -36,8 +40,8 @@
   }
 
   .na-input:focus {
-    outline: t.$na-focus-ring;
-    outline-offset: 1px;
+    outline: var(--na-focus-ring, t.$na-focus-ring);
+    outline-offset: var(--na-focus-offset, t.$na-focus-offset);
     border-color: var(--na-accent, t.$na-accent);
   }
 
@@ -64,8 +68,8 @@
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
-    font-family: t.$na-font;
-    font-size: 12px;
+    font-family: var(--na-font, t.$na-font);
+    font-size: var(--na-fs-xs, t.$na-fs-xs);
     color: var(--na-text, t.$na-text);
     background: var(--na-surface-2, t.$na-surface-2);
     border: 1px solid var(--na-border, t.$na-border);

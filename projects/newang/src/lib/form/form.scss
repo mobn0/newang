@@ -1,5 +1,8 @@
 @use '../../styles/tokens' as t;
 
+// Flat by design: na-form is a layout wrapper for fields plus an action
+// row. It carries no surface, border or padding of its own so nesting it
+// inside na-card (or na-page) never produces a box inside a box.
 :host {
   display: block;
 }
@@ -8,10 +11,6 @@
   display: flex;
   flex-direction: column;
   gap: t.$na-space-md;
-  background: var(--na-surface-1, t.$na-surface-1);
-  border: 1px solid var(--na-border, t.$na-border);
-  border-radius: var(--na-radius-lg, t.$na-radius-lg);
-  padding: t.$na-space-lg;
   box-shadow: none;
 }
 
@@ -25,22 +24,33 @@
   display: flex;
   justify-content: flex-end;
   gap: t.$na-space-sm;
-  padding-top: t.$na-space-sm;
+  padding-top: t.$na-space-md;
   border-top: 1px solid var(--na-border, t.$na-border);
 }
 
-.na-form__submit {
+.na-form__submit,
+.na-form__cancel {
   appearance: none;
-  font-family: t.$na-font;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 10px 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--na-control-h-md, t.$na-control-h-md);
+  padding: 0 18px;
+  font-family: var(--na-font, t.$na-font);
+  font-size: var(--na-fs-md, t.$na-fs-md);
+  font-weight: var(--na-weight-semibold, t.$na-weight-semibold);
+  line-height: 1;
   border-radius: var(--na-radius-md, t.$na-radius-md);
+  cursor: pointer;
+  box-shadow: none;
+  transition: background var(--na-dur, t.$na-dur) ease,
+    border-color var(--na-dur, t.$na-dur) ease, color var(--na-dur, t.$na-dur) ease;
+}
+
+.na-form__submit {
   border: 1px solid var(--na-accent, t.$na-accent);
   background: var(--na-accent, t.$na-accent);
   color: var(--na-accent-ink, t.$na-accent-ink);
-  cursor: pointer;
-  box-shadow: none;
 }
 
 .na-form__submit:hover:not(:disabled) {
@@ -54,14 +64,12 @@
 }
 
 .na-form__cancel {
-  appearance: none;
-  font-family: t.$na-font;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 10px 18px;
-  border-radius: var(--na-radius-md, t.$na-radius-md);
-  border: 1px solid var(--na-border, t.$na-border);
+  border: 1px solid var(--na-border-strong, t.$na-border-strong);
   background: transparent;
   color: var(--na-text-muted, t.$na-text-muted);
-  cursor: pointer;
+}
+
+.na-form__cancel:hover:not(:disabled) {
+  background: var(--na-surface-2, t.$na-surface-2);
+  color: var(--na-text, t.$na-text);
 }

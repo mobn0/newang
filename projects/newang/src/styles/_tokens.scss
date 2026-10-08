@@ -28,6 +28,26 @@ $na-radius-sm: 0 !default;
 $na-radius-md: 0 !default;
 $na-radius-lg: 0 !default;
 
+// One type ramp. Every size in the library comes from here — no ad-hoc px.
+$na-fs-xs: 12px !default; // hints, errors, table heads, badges
+$na-fs-sm: 13px !default; // labels, subtitles, inline code
+$na-fs-md: 14px !default; // body text and controls (base)
+$na-fs-lg: 16px !default; // card and alert titles, text-lg
+$na-fs-xl: 18px !default; // h3, shell titles
+$na-fs-2xl: 24px !default; // h2
+$na-fs-3xl: 30px !default; // h1
+
+$na-weight-medium: 500 !default;
+$na-weight-semibold: 600 !default;
+$na-weight-bold: 700 !default;
+
+// One control rhythm: inputs, buttons and tabs share these baselines.
+$na-control-h-sm: 32px !default;
+$na-control-h-md: 40px !default;
+$na-control-h-lg: 48px !default;
+
+$na-dur: 120ms !default; // single transition duration for interactive bits
+
 $na-space-xs: 4px !default;
 $na-space-sm: 8px !default;
 $na-space-md: 16px !default;
@@ -38,6 +58,7 @@ $na-font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif !def
 $na-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace !default;
 
 $na-focus-ring: 2px solid $na-accent !default;
+$na-focus-offset: 2px !default;
 
 // Emit CSS custom properties so apps get zero-config theming
 // (components reference var(--na-*) with SCSS fallback).
@@ -69,4 +90,19 @@ $na-focus-ring: 2px solid $na-accent !default;
   --na-space-xl: #{$na-space-xl};
   --na-font: #{$na-font};
   --na-mono: #{$na-mono};
+  --na-fs-xs: #{$na-fs-xs};
+  --na-fs-sm: #{$na-fs-sm};
+  --na-fs-md: #{$na-fs-md};
+  --na-fs-lg: #{$na-fs-lg};
+  --na-fs-xl: #{$na-fs-xl};
+  --na-fs-2xl: #{$na-fs-2xl};
+  --na-fs-3xl: #{$na-fs-3xl};
+  --na-weight-medium: #{$na-weight-medium};
+  --na-weight-semibold: #{$na-weight-semibold};
+  --na-weight-bold: #{$na-weight-bold};
+  --na-control-h-sm: #{$na-control-h-sm};
+  --na-control-h-md: #{$na-control-h-md};
+  --na-control-h-lg: #{$na-control-h-lg};
+  --na-dur: #{$na-dur};
+  --na-focus-offset: #{$na-focus-offset};
 }

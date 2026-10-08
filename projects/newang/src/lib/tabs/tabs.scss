@@ -16,12 +16,15 @@
   border: 0;
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
-  padding: 10px 14px;
-  font-family: t.$na-font;
-  font-size: 14px;
-  font-weight: 600;
+  height: var(--na-control-h-md, t.$na-control-h-md);
+  padding: 0 14px;
+  font-family: var(--na-font, t.$na-font);
+  font-size: var(--na-fs-md, t.$na-fs-md);
+  font-weight: var(--na-weight-semibold, t.$na-weight-semibold);
   color: var(--na-text-muted, t.$na-text-muted);
   cursor: pointer;
+  transition: color var(--na-dur, t.$na-dur) ease,
+    border-color var(--na-dur, t.$na-dur) ease;
 }
 
 .na-tabs__tab:hover {

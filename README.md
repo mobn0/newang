@@ -51,7 +51,8 @@ No `class=`, no `style=`, no stylesheets. Control everything with inputs: `gap`,
   <na-split columns="280px 1fr"><div>Side</div><div>Main</div></na-split>
   ```
 - `na-field`'s `error` only renders the message. Add `[invalid]="true"` (or `aria-invalid="true"`) to the projected `input naInput` to paint the danger border.
-- `na-button` defaults to `variant="primary"`, `size="md"`, `type="button"`; pass `fullWidth` for a block-level button.
+- `na-button` defaults to `variant="primary"`, `size="md"`, `type="button"`; pass `fullWidth` for a block-level button. `loading` and `disabled` both render a flat inactive surface — the lime accent is reserved for live primary actions.
+- `na-form` is a flat layout wrapper (fields + action row with a hairline). It has no surface or border of its own, so nesting it in `na-card` never produces a box inside a box.
 - `na-page` defaults to `maxWidth="md"`.
 - `na-header`/`na-footer` ship with 16px side gutters and default to `maxWidth="full"`; pass `sm`/`md`/`lg` to cap content to the `na-page` widths so shell aligns with page.
 - `na-breadcrumbs` accepts plain strings or `{ label, href }` items — items with `href` render as links.
@@ -73,6 +74,8 @@ No `class=`, no `style=`, no stylesheets. Control everything with inputs: `gap`,
 ## Theme
 
 Dark-only for v1. Tokens live in `newang/styles` (`$na-bg`, `$na-accent`, …) as `!default` SCSS variables mirrored to `--na-*` CSS custom properties — colors, radii (`--na-radius-sm/md/lg`), spacing (`--na-space-xs`…`--na-space-xl`) and fonts (`--na-font`, `--na-mono`). Components read them via `var(--na-*, <fallback>)`, so consumers can re-skin at runtime with plain CSS, no SCSS rebuild needed. Flat elevation via 1px borders; focus is a 2px lime `outline`. Stylelint bans `linear-gradient`, `box-shadow` (except `none`), `text-shadow` and `drop-shadow`.
+
+One system, not ad-hoc values. Everything sizes off shared tokens: `--na-fs-xs`…`--na-fs-3xl` (12/13/14/16/18/24/30), `--na-weight-medium/semibold/bold` (500/600/700), `--na-control-h-sm/md/lg` (32/40/48, shared by inputs, buttons, tabs and form actions), `--na-focus-offset` (2px everywhere) and `--na-dur` (120ms on every interactive element).
 
 Square by default, round on purpose: all corner radii ship as `0`. The only round elements are radio dots (a round radio is what distinguishes it from a checkbox), the switch track/thumb (toggle affordance) and spinner rings including the button loading spinner (rotation needs a circle). Everything else — cards, alerts, badges, avatars, progress, inputs, buttons, modals, tooltips — is square. Set `--na-radius-sm/md/lg` to bring roundness back globally.
 

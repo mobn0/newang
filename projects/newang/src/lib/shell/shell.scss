@@ -45,14 +45,14 @@
 
 .na-header__title {
   margin: 0;
-  font-size: 22px;
-  font-weight: 700;
+  font-size: var(--na-fs-xl, t.$na-fs-xl);
+  font-weight: var(--na-weight-bold, t.$na-weight-bold);
   color: var(--na-text, t.$na-text);
 }
 
 .na-header__subtitle {
   margin: t.$na-space-xs 0 0;
-  font-size: 13px;
+  font-size: var(--na-fs-sm, t.$na-fs-sm);
   color: var(--na-text-muted, t.$na-text-muted);
 }
 
@@ -74,7 +74,7 @@
   padding-top: t.$na-space-md;
   border-top: 1px solid var(--na-border, t.$na-border);
   margin-top: t.$na-space-md;
-  font-size: 13px;
+  font-size: var(--na-fs-sm, t.$na-fs-sm);
   color: var(--na-text-muted, t.$na-text-muted);
 }
 

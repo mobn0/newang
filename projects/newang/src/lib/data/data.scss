@@ -14,14 +14,14 @@
 .na-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: t.$na-font;
-  font-size: 14px;
+  font-family: var(--na-font, t.$na-font);
+  font-size: var(--na-fs-md, t.$na-fs-md);
 }
 
 .na-table th {
   text-align: left;
-  font-size: 12px;
-  font-weight: 650;
+  font-size: var(--na-fs-xs, t.$na-fs-xs);
+  font-weight: var(--na-weight-semibold, t.$na-weight-semibold);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--na-text-muted, t.$na-text-muted);
@@ -58,7 +58,7 @@
   display: flex;
   align-items: center;
   gap: t.$na-space-sm;
-  font-size: 13px;
+  font-size: var(--na-fs-sm, t.$na-fs-sm);
 }
 
 .na-crumbs__item {
@@ -82,7 +82,7 @@
 
 .na-crumbs__current {
   color: var(--na-accent, t.$na-accent);
-  font-weight: 600;
+  font-weight: var(--na-weight-semibold, t.$na-weight-semibold);
 }
 
 .na-spinner {
@@ -96,7 +96,7 @@
 }
 
 .na-progress {
-  height: 8px;
+  height: 6px;
   border-radius: var(--na-radius-md, t.$na-radius-md);
   background: var(--na-surface-3, t.$na-surface-3);
   border: 1px solid var(--na-border, t.$na-border);

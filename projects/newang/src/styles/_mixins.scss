@@ -2,8 +2,8 @@
 
 // Focus ring: flat outline only — never box-shadow glow.
 @mixin focus-ring {
-  outline: t.$na-focus-ring;
-  outline-offset: 2px;
+  outline: var(--na-focus-ring, t.$na-focus-ring);
+  outline-offset: var(--na-focus-offset, t.$na-focus-offset);
 }
 
 // Single-line truncate.

@@ -84,11 +84,15 @@ if (!(await page.locator('#btn-loading .na-btn__spinner').count())) fail('button
 await page.locator('#btn-block').screenshot({ path: `${OUT}/btn-block.png` });
 ok('buttons');
 
-// switch / checkbox / radio
-await page.locator('#sw-basic input').click();
-if ((await page.locator('#sw-basic input').isChecked()) !== false) fail('switch', 'toggle did not flip');
-await page.locator('#cb-basic input').click();
-if (!(await page.locator('#cb-basic input').isChecked())) fail('checkbox', 'toggle did not flip');
+// switch / checkbox / radio — the native input is visually hidden (sr-only),
+// so drive them the way a user does: click the visible label.
+const swCheck = async () => page.locator('#sw-basic input').isChecked();
+await page.locator('#sw-basic .na-switch').click();
+await poll('switch', async () => (await swCheck()) === false);
+
+await page.locator('#cb-basic .na-check').click();
+await poll('checkbox', async () => page.locator('#cb-basic input').isChecked());
+
 await page.locator('#radio-basic label', { hasText: 'Team' }).click();
 await poll('radio', async () => page.locator('#radio-basic input').nth(2).isChecked());
 await poll('radio-echo', async () => page.getByText('picked plan: team').count().then((n) => n > 0));
@@ -186,6 +190,156 @@ for (const [route, name] of [['/', 'landing'], ['/gallery', 'gallery']]) {
 ok('mobile screenshots');
 
 checkJsErrors('gallery', galleryErrors);
+
+// --- 4. design-system rhythm (locks the type/control/motion system) --------
+{
+  const h = async (sel) =>
+    page.locator(sel).first().evaluate((el) => el.getBoundingClientRect().height);
+  const rhythm = {
+    input: await h('#field-email'),
+    btnMd: await h('#btn-md button'),
+    btnSm: await h('#btn-sm button'),
+    btnLg: await h('#btn-lg button'),
+    tab: await h('#demo-tabs button[role="tab"]'),
+    formSubmit: await h('na-form button[type="submit"]'),
+  };
+  measures.rhythm = rhythm;
+  // Sizes share a baseline per step; only the md tier must match exactly.
+  const expected = { input: 40, btnMd: 40, tab: 40, formSubmit: 40, btnSm: 32, btnLg: 48 };
+  for (const [k, want] of Object.entries(expected)) {
+    if (Math.abs(rhythm[k] - want) > 1.5) fail(`rhythm ${k}`, `${rhythm[k]}px, expected ${want}px`);
+  }
+  if (!(rhythm.btnSm < rhythm.btnMd && rhythm.btnMd < rhythm.btnLg))
+    fail('rhythm sizes', `sm=${rhythm.btnSm} md=${rhythm.btnMd} lg=${rhythm.btnLg}`);
+
+  // Focus offsets must agree. Unfocused elements report the computed default
+  // (0px), so read them off a :focus-visible rule instead of live state.
+  const offsets = await page.evaluate(() => {
+    const rules = [...document.styleSheets]
+      .flatMap((sh) => {
+        try {
+          return [...sh.cssRules];
+        } catch {
+          return [];
+        }
+      })
+      .filter((r) => r.selectorText && r.selectorText.includes('focus-visible'));
+    const map = {};
+    for (const r of rules) {
+      const off = r.style.outlineOffset || r.style.getPropertyValue('outline-offset');
+      if (off) map[r.selectorText.replace(/\s+/g, ' ').trim()] = off;
+    }
+    return map;
+  });
+  measures.focusOffsets = offsets;
+  const vals = new Set(Object.values(offsets));
+  if (vals.size > 1) fail('focus-offset', JSON.stringify(offsets));
+  // All rules must resolve to the same offset (through the token).
+  for (const v of vals) {
+    if (!/var\(--na-focus-offset,\s*2px\)$/.test(v) && v !== '2px')
+      fail('focus-offset', `unresolved: ${v}`);
+  }
+
+  // every container shares one border weight/color; controls use --na-border resting
+  const borders = await page.evaluate(() => {
+    const cs = (sel) => {
+      const s = getComputedStyle(document.querySelector(sel));
+      return `${s.borderTopWidth} ${s.borderTopColor}`;
+    };
+    return { card: cs('.na-card'), alert: cs('.na-alert'), table: cs('.na-table-wrap'), input: cs('#field-email') };
+  });
+  measures.borders = borders;
+  if (new Set([borders.card, borders.alert, borders.table]).size !== 1)
+    fail('borders', JSON.stringify(borders));
+
+  // type ramp: no component should render an off-ramp size
+  const ramp = new Set(['12px', '13px', '14px', '16px', '18px', '24px', '30px']);
+  const sizes = await page.evaluate(() => {
+    const pick = (sel) => {
+      const el = document.querySelector(sel);
+      return el ? getComputedStyle(el).fontSize : null;
+    };
+    return {
+      h1: pick('na-heading h1'),
+      h2: pick('#sec-buttons h2'),
+      h3: pick('#sec-type na-heading h3'),
+      cardTitle: pick('.na-card__title'),
+      fieldLabel: pick('.na-field__label'),
+      hint: pick('.na-field__hint'),
+      badge: pick('.na-badge'),
+      headerTitle: pick('.na-header__title'),
+    };
+  });
+  measures.typeSizes = sizes;
+  for (const [k, v] of Object.entries(sizes)) if (!ramp.has(v)) fail(`type-ramp ${k}`, `${v} off-ramp`);
+  if (!(parseInt(sizes.h1) > parseInt(sizes.h2) && parseInt(sizes.h2) > parseInt(sizes.h3)))
+    fail('type-scale', `h1=${sizes.h1} h2=${sizes.h2} h3=${sizes.h3}`);
+  if (parseInt(sizes.h2) <= parseInt(sizes.headerTitle))
+    fail('type-scale', `h2 ${sizes.h2} must outrank header title ${sizes.headerTitle}`);
+
+  // no weight outside 500/600/700
+  const weights = await page.evaluate(() =>
+    [...document.querySelectorAll('na-card__title, .na-alert__title, .na-field__label, .na-badge, h1, h2')]
+      .map((el) => getComputedStyle(el).fontWeight)
+      .filter((w) => !['500', '600', '700'].includes(w)),
+  );
+  if (weights.length) fail('font-weights', `off-ramp: ${[...new Set(weights)].join(',')}`);
+
+  // na-form must be flat (no box inside a box) and empty-state solid
+  const formFlat = await page.evaluate(() => {
+    const s = getComputedStyle(document.querySelector('na-form .na-form'));
+    return { bg: s.backgroundColor, bw: s.borderTopWidth, pad: s.paddingTop };
+  });
+  measures.formFlat = formFlat;
+  if (formFlat.bw !== '0px' || formFlat.pad !== '0px' || formFlat.bg !== 'rgba(0, 0, 0, 0)')
+    fail('form-flat', JSON.stringify(formFlat));
+  const emptyBorder = await page.evaluate(() => getComputedStyle(document.querySelector('.na-empty')).borderTopStyle);
+  if (emptyBorder !== 'solid') fail('empty-state', `border-style=${emptyBorder}`);
+  ok('rhythm/type/borders');
+}
+
+// Control boxes must align to a shared baseline, not sit 1px proud/short.
+{
+  const boxes = await page.evaluate(() => {
+    const box = (sel, hostSel) => {
+      const el = document.querySelector(sel);
+      if (!el) return null;
+      const host = el.closest(hostSel);
+      const r = el.getBoundingClientRect();
+      const hr = host.getBoundingClientRect();
+      return {
+        top: +(r.top - hr.top).toFixed(1),
+        h: +r.height.toFixed(1),
+        rowH: +hr.height.toFixed(1),
+      };
+    };
+    return {
+      check: box('.na-check__box', 'na-checkbox'),
+      radio: box('.na-radio__dot', '.na-radio'),
+      switchTrack: box('.na-switch__track', 'na-switch'),
+    };
+  });
+  measures.boxes = boxes;
+  for (const [k, v] of Object.entries(boxes)) {
+    if (!v) {
+      fail(`box-missing ${k}`, 'selector not found');
+      continue;
+    }
+    if (v.h > 24) fail(`box-size ${k}`, `${v.h}px too tall`);
+    // vertically centred inside its 40px row: offset should be ~11px each way
+    const off = v.top;
+    if (Math.abs(off - (v.rowH - v.h) / 2) > 1.5) fail(`box-align ${k}`, `top=${off} row=${v.rowH} box=${v.h}`);
+  }
+  ok('control alignment');
+}
+
+// --- 5. per-section close-ups for visual review -----------------------------
+for (const sec of ['sec-buttons', 'sec-forms', 'sec-type', 'sec-display', 'sec-layout', 'sec-overlay']) {
+  await page.locator(`#${sec}`).screenshot({ path: `${OUT}/${sec}.png` });
+}
+ok('section close-ups');
+
+checkJsErrors('gallery (post-measure)', galleryErrors);
 await page.close();
 await browser.close();
 

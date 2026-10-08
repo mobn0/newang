@@ -13,8 +13,8 @@
     margin: 0;
     background: var(--na-bg, t.$na-bg);
     color: var(--na-text, t.$na-text);
-    font-family: t.$na-font;
-    font-size: 14px;
+    font-family: var(--na-font, t.$na-font);
+    font-size: var(--na-fs-md, t.$na-fs-md);
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }

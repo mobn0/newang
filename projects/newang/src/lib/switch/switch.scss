@@ -8,17 +8,23 @@
   display: inline-flex;
   align-items: center;
   gap: t.$na-space-sm;
+  min-height: var(--na-control-h-md, t.$na-control-h-md);
   cursor: pointer;
-  font-family: t.$na-font;
-  font-size: 14px;
+  font-family: var(--na-font, t.$na-font);
+  font-size: var(--na-fs-md, t.$na-fs-md);
   color: var(--na-text, t.$na-text);
 }
 
 .na-switch__input {
   position: absolute;
-  opacity: 0;
   width: 1px;
   height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
 }
 
 .na-switch__track {
@@ -31,6 +37,8 @@
   align-items: center;
   padding: 2px;
   box-sizing: border-box;
+  transition: background var(--na-dur, t.$na-dur) ease,
+    border-color var(--na-dur, t.$na-dur) ease;
 }
 
 .na-switch__thumb {
@@ -38,6 +46,16 @@
   height: 16px;
   border-radius: 50%;
   background: var(--na-text-muted, t.$na-text-muted);
+  transition: background var(--na-dur, t.$na-dur) ease, margin-left var(--na-dur, t.$na-dur) ease;
+}
+
+.na-switch__input:disabled + .na-switch__track {
+  opacity: 0.5;
+}
+
+.na-switch:has(.na-switch__input:disabled) {
+  color: var(--na-text-faint, t.$na-text-faint);
+  cursor: not-allowed;
 }
 
 .na-switch__input:checked + .na-switch__track {
@@ -51,8 +69,8 @@
 }
 
 .na-switch__input:focus-visible + .na-switch__track {
-  outline: t.$na-focus-ring;
-  outline-offset: 2px;
+  outline: var(--na-focus-ring, t.$na-focus-ring);
+  outline-offset: var(--na-focus-offset, t.$na-focus-offset);
 }
 
 .na-switch__input:disabled ~ .na-switch__label,

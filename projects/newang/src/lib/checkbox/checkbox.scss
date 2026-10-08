@@ -4,21 +4,39 @@
   display: inline-block;
 }
 
+// Dim the whole control when disabled, including the native input state.
+.na-check__input:disabled + .na-check__box {
+  opacity: 0.5;
+}
+
+.na-check:has(.na-check__input:disabled) {
+  color: var(--na-text-faint, t.$na-text-faint);
+  cursor: not-allowed;
+}
+
+// sr-only: keeps the native input focusable and clickable but out of the
+// visual flow, so the custom box aligns to the text baseline.
+.na-check__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
 .na-check {
   display: inline-flex;
   align-items: center;
   gap: t.$na-space-sm;
+  min-height: var(--na-control-h-md, t.$na-control-h-md);
   cursor: pointer;
-  font-family: t.$na-font;
-  font-size: 14px;
+  font-family: var(--na-font, t.$na-font);
+  font-size: var(--na-fs-md, t.$na-fs-md);
   color: var(--na-text, t.$na-text);
-}
-
-.na-check__input {
-  position: absolute;
-  opacity: 0;
-  width: 1px;
-  height: 1px;
 }
 
 .na-check__box {
@@ -31,6 +49,8 @@
   align-items: center;
   justify-content: center;
   flex: none;
+  transition: background var(--na-dur, t.$na-dur) ease,
+    border-color var(--na-dur, t.$na-dur) ease;
 }
 
 .na-check__input:checked + .na-check__box {
@@ -40,13 +60,13 @@
 
 .na-check__input:checked + .na-check__box::after {
   content: '✓';
-  font-size: 12px;
-  font-weight: 800;
+  font-size: var(--na-fs-xs, t.$na-fs-xs);
+  font-weight: var(--na-weight-bold, t.$na-weight-bold);
   color: var(--na-accent-ink, t.$na-accent-ink);
   line-height: 1;
 }
 
 .na-check__input:focus-visible + .na-check__box {
-  outline: t.$na-focus-ring;
-  outline-offset: 2px;
+  outline: var(--na-focus-ring, t.$na-focus-ring);
+  outline-offset: var(--na-focus-offset, t.$na-focus-offset);
 }

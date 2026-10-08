@@ -6,48 +6,48 @@
 
 .na-h {
   margin: 0;
-  font-family: t.$na-font;
+  font-family: var(--na-font, t.$na-font);
   color: var(--na-text, t.$na-text);
   line-height: 1.25;
 }
 
 .na-h1 {
-  font-size: 30px;
-  font-weight: 700;
+  font-size: var(--na-fs-3xl, t.$na-fs-3xl);
+  font-weight: var(--na-weight-bold, t.$na-weight-bold);
 }
 
 .na-h2 {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: var(--na-fs-2xl, t.$na-fs-2xl);
+  font-weight: var(--na-weight-bold, t.$na-weight-bold);
 }
 
 .na-h3 {
-  font-size: 18px;
-  font-weight: 650;
+  font-size: var(--na-fs-xl, t.$na-fs-xl);
+  font-weight: var(--na-weight-semibold, t.$na-weight-semibold);
 }
 
 .na-h4 {
-  font-size: 15px;
-  font-weight: 650;
+  font-size: var(--na-fs-lg, t.$na-fs-lg);
+  font-weight: var(--na-weight-semibold, t.$na-weight-semibold);
 }
 
 .na-text {
   margin: 0;
-  font-family: t.$na-font;
+  font-family: var(--na-font, t.$na-font);
   line-height: 1.55;
   color: var(--na-text, t.$na-text);
 }
 
 .na-text--sm {
-  font-size: 13px;
+  font-size: var(--na-fs-sm, t.$na-fs-sm);
 }
 
 .na-text--md {
-  font-size: 14px;
+  font-size: var(--na-fs-md, t.$na-fs-md);
 }
 
 .na-text--lg {
-  font-size: 16px;
+  font-size: var(--na-fs-lg, t.$na-fs-lg);
 }
 
 .na-text--muted {
@@ -68,32 +68,34 @@
 }
 
 .na-code {
-  font-family: t.$na-mono;
-  font-size: 13px;
+  font-family: var(--na-mono, t.$na-mono);
+  font-size: var(--na-fs-sm, t.$na-fs-sm);
   background: var(--na-surface-2, t.$na-surface-2);
   border: 1px solid var(--na-border, t.$na-border);
   border-radius: var(--na-radius-sm, t.$na-radius-sm);
-  padding: 2px 7px;
+  padding: 3px 8px;
+  vertical-align: middle;
   color: var(--na-accent, t.$na-accent);
 }
 
 .na-empty {
   text-align: center;
   padding: t.$na-space-xl t.$na-space-md;
-  border: 1px dashed var(--na-border-strong, t.$na-border-strong);
+  border: 1px solid var(--na-border, t.$na-border);
   border-radius: var(--na-radius-lg, t.$na-radius-lg);
   background: var(--na-surface-1, t.$na-surface-1);
 }
 
 .na-empty__title {
   margin: 0;
-  font-weight: 650;
+  font-size: var(--na-fs-lg, t.$na-fs-lg);
+  font-weight: var(--na-weight-semibold, t.$na-weight-semibold);
   color: var(--na-text, t.$na-text);
 }
 
 .na-empty__desc {
   margin: t.$na-space-xs 0 0;
-  font-size: 13px;
+  font-size: var(--na-fs-sm, t.$na-fs-sm);
   color: var(--na-text-muted, t.$na-text-muted);
 }
 

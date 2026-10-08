@@ -11,9 +11,9 @@
 }
 
 .na-field__label {
-  font-family: t.$na-font;
-  font-size: 13px;
-  font-weight: 600;
+  font-family: var(--na-font, t.$na-font);
+  font-size: var(--na-fs-sm, t.$na-fs-sm);
+  font-weight: var(--na-weight-semibold, t.$na-weight-semibold);
   color: var(--na-text, t.$na-text);
 }
 
@@ -26,11 +26,11 @@
 }
 
 .na-field__hint {
-  font-size: 12px;
+  font-size: var(--na-fs-xs, t.$na-fs-xs);
   color: var(--na-text-muted, t.$na-text-muted);
 }
 
 .na-field__error {
-  font-size: 12px;
+  font-size: var(--na-fs-xs, t.$na-fs-xs);
   color: var(--na-danger, t.$na-danger);
 }

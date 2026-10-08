@@ -6,8 +6,8 @@
 
 .na-radio-group__label {
   margin: 0 0 t.$na-space-sm;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: var(--na-fs-sm, t.$na-fs-sm);
+  font-weight: var(--na-weight-semibold, t.$na-weight-semibold);
   color: var(--na-text, t.$na-text);
 }
 
@@ -21,17 +21,23 @@
   display: inline-flex;
   align-items: center;
   gap: t.$na-space-sm;
+  min-height: var(--na-control-h-md, t.$na-control-h-md);
   cursor: pointer;
-  font-family: t.$na-font;
-  font-size: 14px;
+  font-family: var(--na-font, t.$na-font);
+  font-size: var(--na-fs-md, t.$na-fs-md);
   color: var(--na-text, t.$na-text);
 }
 
 .na-radio__input {
   position: absolute;
-  opacity: 0;
   width: 1px;
   height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
 }
 
 .na-radio__dot {
@@ -44,6 +50,16 @@
   align-items: center;
   justify-content: center;
   flex: none;
+  transition: border-color var(--na-dur, t.$na-dur) ease;
+}
+
+.na-radio__input:disabled + .na-radio__dot {
+  opacity: 0.5;
+}
+
+.na-radio:has(.na-radio__input:disabled) {
+  color: var(--na-text-faint, t.$na-text-faint);
+  cursor: not-allowed;
 }
 
 .na-radio__input:checked + .na-radio__dot {
@@ -59,6 +75,6 @@
 }
 
 .na-radio__input:focus-visible + .na-radio__dot {
-  outline: t.$na-focus-ring;
-  outline-offset: 2px;
+  outline: var(--na-focus-ring, t.$na-focus-ring);
+  outline-offset: var(--na-focus-offset, t.$na-focus-offset);
 }

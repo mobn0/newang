@@ -32,7 +32,7 @@
 
 .na-avatar__initials {
   font-family: t.$na-font;
-  font-size: 13px;
-  font-weight: 700;
+  font-size: var(--na-fs-sm, t.$na-fs-sm);
+  font-weight: var(--na-weight-bold, t.$na-weight-bold);
   color: var(--na-accent, t.$na-accent);
 }

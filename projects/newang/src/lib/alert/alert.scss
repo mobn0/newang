@@ -14,13 +14,13 @@
 
 .na-alert__title {
   margin: 0 0 t.$na-space-xs;
-  font-size: 14px;
-  font-weight: 650;
+  font-size: var(--na-fs-md, t.$na-fs-md);
+  font-weight: var(--na-weight-semibold, t.$na-weight-semibold);
   color: var(--na-text, t.$na-text);
 }
 
 .na-alert__body {
-  font-size: 13px;
+  font-size: var(--na-fs-sm, t.$na-fs-sm);
   color: var(--na-text-muted, t.$na-text-muted);
 }
 

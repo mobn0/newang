@@ -29,8 +29,8 @@
 
 .na-modal__title {
   margin: 0;
-  font-size: 16px;
-  font-weight: 650;
+  font-size: var(--na-fs-lg, t.$na-fs-lg);
+  font-weight: var(--na-weight-semibold, t.$na-weight-semibold);
   color: var(--na-text, t.$na-text);
 }
 
@@ -49,5 +49,5 @@
 .na-modal__body {
   padding: t.$na-space-md;
   color: var(--na-text-muted, t.$na-text-muted);
-  font-size: 14px;
+  font-size: var(--na-fs-md, t.$na-fs-md);
 }
